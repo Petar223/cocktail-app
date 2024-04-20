@@ -1,4 +1,4 @@
-// NoItemsFound.js
+
 import React from "react";
 import "./NoItemsFound.css";
 
