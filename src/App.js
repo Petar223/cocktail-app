@@ -6,23 +6,39 @@ import { drinks, cocktails } from "./data/drinks";
 import Header from "./components/Header";
 import "./App.css";
 
-function App() {
+function Layout({ children }) {
   return (
     <div>
-      <Header />
+      <Header/>
       <div className="content-container">
-        <Router>
-          <Routes>
-            <Route path="/" element={<TypeSelection />} />
-            <Route path="/type/:type" element={<DrinkList drinks={drinks} />} />
-            <Route
-              path="/type/:type/drink/:drinkId"
-              element={<CocktailList cocktails={cocktails} drinks={drinks} />}
-            />
-          </Routes>
-        </Router>
+        {children}
       </div>
     </div>
+  )
+}
+
+
+function Root() {
+  return (
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<TypeSelection/>}/>
+          <Route path="/type/:type" element={<DrinkList drinks={drinks}/>}/>
+          <Route
+            path="/type/:type/drink/:drinkId"
+            element={<CocktailList cocktails={cocktails} drinks={drinks}/>}
+          />
+        </Routes>
+      </Layout>
+    </Router>
+)
+}
+
+function App() {
+  return (
+    <Root/>
+
   );
 }
 

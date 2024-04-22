@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import "./DrinkList.css";
 import HeaderWithBackButton from "../shared-components/HeaderWithBackButton";
 import NoItemsFound from "../shared-components/NoItemsFound";
+// import { drinks } from "./data/drinks";
 
 function DrinkList({ drinks }) {
   const { type } = useParams();
