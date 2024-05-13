@@ -3,7 +3,7 @@ import "./CocktailModal.css";
 
 function CocktailModal({ cocktail, drinks, onClose }) {
   const getDrinkName = (id) => {
-    const drink = drinks.find((drink) => drink.id === parseInt(id));
+    const drink = drinks.find((drink) => drink._id === id);
     return drink ? drink.name : "Unknown drink";
   };
 

@@ -1,12 +1,21 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./DrinkList.css";
-import HeaderWithBackButton from "../shared-components/HeaderWithBackButton";
-import NoItemsFound from "../shared-components/NoItemsFound";
-// import { drinks } from "./data/drinks";
+import HeaderWithBackButton from "../../shared-components/HeaderWithBackButton";
+import NoItemsFound from "../../shared-components/NoItemsFound";
 
-function DrinkList({ drinks }) {
+function DrinkList() {
   const { type } = useParams();
   const navigate = useNavigate();
+  const [drinks, setDrinks] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5001/drinks`)
+      .then((response) => response.json())
+      .then((data) => setDrinks(data))
+      .catch((error) => console.error("Error fetching drinks", error));
+  }, [type]);
+
   const filteredDrinks = drinks.filter(
     (drink) =>
       (type === "alcoholic" && drink.alcoholic) ||
@@ -31,8 +40,8 @@ function DrinkList({ drinks }) {
         {filteredDrinks.length > 0 ? (
           filteredDrinks.map((drink) => (
             <Link
-              to={`/type/${type}/drink/${drink.id}`}
-              key={drink.id}
+              to={`/type/${type}/drink/${drink._id}`}
+              key={drink._id}
               className="drink-item"
             >
               <img
