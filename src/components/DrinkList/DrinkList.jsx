@@ -1,8 +1,8 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./DrinkList.css";
-import HeaderWithBackButton from "../../shared-components/HeaderWithBackButton";
-import NoItemsFound from "../../shared-components/NoItemsFound";
+import HeaderWithBackButton from "../../shared-components/HeaderWithBlackButton/HeaderWithBackButton";
+import NoItemsFound from "../../shared-components/NoItemsFound/NoItemsFound";
 
 function DrinkList() {
   const { type } = useParams();
@@ -23,7 +23,7 @@ function DrinkList() {
   );
 
   const goHome = () => {
-    navigate("/");
+    navigate("/browse");
   };
 
   return (

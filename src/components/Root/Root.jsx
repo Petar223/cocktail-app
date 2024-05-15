@@ -1,17 +1,19 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import TypeSelection from "../TypeSelection/TypeSelection";
 import DrinkList from "../DrinkList/DrinkList";
 import CocktailList from "../CoctailList/CocktailList";
 import Layout from "../Layout/Layout";
+import Home from "../Home/Home";
+import TypeSelection from "../TypeSelection/TypeSelection";
 
 function Root() {
   return (
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<TypeSelection />} />
+          <Route path="/" element={<Home />} />
           <Route path="/type/:type" element={<DrinkList />} />
           <Route path="/type/:type/drink/:drinkId" element={<CocktailList />} />
+          <Route path="/browse" element={<TypeSelection />} />
         </Routes>
       </Layout>
     </Router>

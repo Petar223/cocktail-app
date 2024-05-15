@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CocktailModal from "../../modals/CocktailModal";
 import "./CocktailList.css";
-import HeaderWithBackButton from "../../shared-components/HeaderWithBackButton";
-import NoItemsFound from "../../shared-components/NoItemsFound";
+import HeaderWithBackButton from "../../shared-components/HeaderWithBlackButton/HeaderWithBackButton";
+import NoItemsFound from "../../shared-components/NoItemsFound/NoItemsFound";
 
 function CocktailList() {
   const { drinkId, type } = useParams();
@@ -82,7 +82,7 @@ function CocktailList() {
             </div>
           ))
         ) : (
-          <NoItemsFound message="No cocktails found with this ingredient."></NoItemsFound>
+          <NoItemsFound message="No cocktails found with this ingredient." />
         )}
       </div>
       {selectedCocktail ? (

@@ -1,0 +1,43 @@
+.custom-button {
+  width: 30%;
+  border: none;
+  padding: 12px 40px;
+  background-color: #4169e1;
+  color: white;
+  font-size: 22px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.custom-button:before {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: -5px;
+  left: -5px;
+  border-top: 2px solid #4169e1;
+  border-left: 2px solid #4169e1;
+  transition: all 0.25s;
+}
+
+.custom-button:hover:before,
+.custom-button:hover:after {
+  height: 100%;
+  width: 100%;
+}
+
+.custom-button:after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  bottom: -5px;
+  right: -5px;
+  border-bottom: 2px solid #4169e1;
+  border-right: 2px solid #4169e1;
+  transition: all 0.25s;
+}
