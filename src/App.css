@@ -17,5 +17,5 @@ body {
   padding: 20px;
 }
 .content-container {
-  padding-top: 110px; /* Ako je visina headera oko 60px, dodajte malo više za sigurnost */
+  padding-top: 42px; /* Ako je visina headera oko 60px, dodajte malo više za sigurnost */
 }

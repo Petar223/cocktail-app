@@ -4,9 +4,11 @@ import "./CustomButton.css";
 
 const CustomButton = ({ to, children }) => {
   return (
-    <Link to={to} className="custom-button">
-      {children}
-    </Link>
+    <div className="custom-button-wrapper">
+      <Link to={to} className="custom-button">
+        {children}
+      </Link>
+    </div>
   );
 };
 

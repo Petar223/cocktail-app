@@ -1,11 +1,5 @@
 .cocktail-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 50px 30px;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 8px;
-  margin: 10px;
+  display: flex;
 }
 
 .cocktail-item {
@@ -17,18 +11,6 @@
 .cocktail-item:hover {
   transform: scale(1.05);
   background-color: rgba(255, 255, 255, 0.1);
-}
-
-.cocktail-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  border: 2px solid white;
-}
-
-.cocktail-name {
-  text-align: center;
-  margin-top: 8px;
 }
 
 .no-cocktails {
@@ -47,14 +29,4 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-}
-
-.select-cocktail-title {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 8px;
-  text-align: center;
-  margin: 20px 10px;
-  padding: 20px;
-  font-size: 1.5em;
 }

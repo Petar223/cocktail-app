@@ -7,7 +7,7 @@ const Home = () => {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
-    padding: "0 32px",
+    padding: "32px",
     color: "white",
     // margin: "50px 0",
   };

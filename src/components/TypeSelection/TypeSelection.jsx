@@ -6,14 +6,13 @@ function TypeSelection() {
     display: "flex",
     flexDirection: "row",
     alignItems: "flex-start",
-    justifyContent: "space-around",
-    padding: "0 32px",
+    justifyContent: "space-evenly",
+    padding: "32px",
     color: "white",
   };
 
   const taglineStyle = {
     width: "25%",
-    display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "felx-start",
@@ -44,7 +43,8 @@ function TypeSelection() {
   };
 
   const buttonContainerStyle = {
-    padding: "32px 0",
+    display: "flex",
+    padding: "32px 0 0 0",
   };
 
   return (

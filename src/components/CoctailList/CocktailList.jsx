@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CocktailModal from "../../modals/CocktailModal";
 import "./CocktailList.css";
-import HeaderWithBackButton from "../../shared-components/HeaderWithBlackButton/HeaderWithBackButton";
 import NoItemsFound from "../../shared-components/NoItemsFound/NoItemsFound";
+import Item from "../../shared-components/Item/Item";
+import CustomButton from "../../shared-components/CustomButton/CustomButton";
 
 function CocktailList() {
   const { drinkId, type } = useParams();
@@ -11,17 +12,16 @@ function CocktailList() {
   const [selectedCocktail, setSelectedCocktail] = useState(null);
   const [cocktails, setCocktails] = useState([]);
   const [drinks, setDrinks] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5001/cocktails`)
+    fetch(`http://localhost:5000/cocktails`)
       .then((response) => response.json())
       .then((data) => setCocktails(data))
       .catch((error) => console.error("Error fetching cocktails", error));
   }, [type, drinkId]);
 
   useEffect(() => {
-    fetch(`http://localhost:5001/drinks`)
+    fetch(`http://localhost:5000/drinks`)
       .then((response) => response.json())
       .then((data) => setDrinks(data))
       .catch((error) => console.error("Error fetching drinks", error));
@@ -37,7 +37,7 @@ function CocktailList() {
   );
 
   const handleClick = (cocktailId) => {
-    fetch(`http://localhost:5001/cocktails/${cocktailId}`)
+    fetch(`http://localhost:5000/cocktails/${cocktailId}`)
       .then((response) => response.json())
       .then((data) => {
         setSelectedCocktail(data);
@@ -51,35 +51,49 @@ function CocktailList() {
     setSelectedCocktail(null);
   };
 
-  const handleBack = () => {
-    navigate(`/type/${type}`);
+  const headerContentStyle = {
+    display: "flex",
+    height: "50px",
+    justifyContent: "space-between",
+    alignItems: "center",
+    color: "white",
+    textAlign: "left",
+    fontSize: "2em",
+    fontWeight: "bold",
+    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.8)",
+    padding: "10px",
+    borderRadius: "8px",
+    margin: "32px",
+  };
+
+  const coctailContainer = {
+    display: "flex",
+    margin: "32px",
+    justifyContent: "flex-start",
+    alignItems: "self-start",
+    flexDirection: "row",
+    flexWrap: "wrap",
   };
 
   return (
     <div>
-      <HeaderWithBackButton
-        title="Cocktails"
-        buttonText="Back to Drinks"
-        onBackClick={handleBack}
-      />
-      <div className="select-cocktail-title">
-        <h2>Which cocktail would you like to make?</h2>
+      <div style={headerContentStyle}>
+        <div>
+          <h3>Coctails</h3>
+        </div>
+        <div>
+          <CustomButton to={`/type/${type}`}>Back to Drinks</CustomButton>
+        </div>
       </div>
-      <div className="cocktail-container">
+      <div style={coctailContainer}>
         {filteredCocktails.length > 0 ? (
           filteredCocktails.map((cocktail) => (
-            <div
-              key={cocktail.name}
-              className="cocktail-item"
-              onClick={() => handleClick(cocktail._id)}
-            >
-              <img
-                src={cocktail.imageUrl}
-                alt={cocktail.name}
-                className="cocktail-image"
-              />
-              <h3 className="cocktail-name">{cocktail.name}</h3>
-            </div>
+            <Item
+              key={cocktail._id}
+              drinkType={cocktail}
+              handleClick={handleClick}
+              useLink={false}
+            />
           ))
         ) : (
           <NoItemsFound message="No cocktails found with this ingredient." />

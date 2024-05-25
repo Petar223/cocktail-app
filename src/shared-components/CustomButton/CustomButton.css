@@ -1,5 +1,5 @@
 .custom-button {
-  width: 30%;
+  width: 100%;
   border: none;
   padding: 12px 40px;
   background-color: #4169e1;
@@ -40,4 +40,8 @@
   border-bottom: 2px solid #4169e1;
   border-right: 2px solid #4169e1;
   transition: all 0.25s;
+}
+
+.custom-button-wrapper {
+  display: flex;
 }
