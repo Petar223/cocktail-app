@@ -22,13 +22,12 @@ const taglineStyle = {
   backdropFilter: "blur(3px)",
   WebkitBackdropFilter: "blur(3px)",
   cursor: "pointer",
+  textDecoration: "none",
 };
 
 const imageStyle = {
   width: "100%",
   height: "auto",
-  borderRadius: "8px",
-  border: "2px solid white",
 };
 
 const nameStyle = {
@@ -39,12 +38,8 @@ const nameStyle = {
 const Item = ({ drinkType, handleClick, useLink, linkTo }) => {
   const content = (
     <>
-      <img
-        src={drinkType.imageUrl}
-        alt={drinkType.name}
-        className={imageStyle}
-      />
-      <h3 className={nameStyle}>{drinkType.name}</h3>
+      <img src={drinkType.imageUrl} alt={drinkType.name} style={imageStyle} />
+      <h3 style={nameStyle}>{drinkType.name}</h3>
     </>
   );
 

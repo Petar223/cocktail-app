@@ -70,7 +70,7 @@ function CocktailList() {
     display: "flex",
     margin: "32px",
     justifyContent: "flex-start",
-    alignItems: "self-start",
+    alignItems: "space-evenly",
     flexDirection: "row",
     flexWrap: "wrap",
   };

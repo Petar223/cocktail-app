@@ -19,3 +19,7 @@ body {
 .content-container {
   padding-top: 42px; /* Ako je visina headera oko 60px, dodajte malo više za sigurnost */
 }
+/* 
+img {
+  width: 100%;
+} */

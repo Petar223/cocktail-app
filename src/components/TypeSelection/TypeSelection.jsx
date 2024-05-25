@@ -31,7 +31,7 @@ function TypeSelection() {
   };
 
   const imageStyle = {
-    maxWidth: "100%",
+    width: "100%",
     height: "auto",
   };
 
@@ -52,8 +52,12 @@ function TypeSelection() {
       <div style={taglineStyle}>
         <div>
           <div style={taglineLargerStyle}>Alcoholic Cocktails</div>
-          <div style={imageStyle}>
-            <img src="/images/alcoholic.jpg" alt="Alcoholic Cocktail" />
+          <div>
+            <img
+              style={imageStyle}
+              src="/images/alcoholic.jpg"
+              alt="Alcoholic Cocktail"
+            />
           </div>
           <div style={buttonContainerStyle}>
             <CustomButton to="/type/alcoholic">Explore</CustomButton>
@@ -64,8 +68,9 @@ function TypeSelection() {
       <div style={taglineStyle}>
         <div>
           <div style={taglineLargerStyle}>Non-Alcoholic Cocktails</div>
-          <div style={imageStyle}>
+          <div>
             <img
+              style={imageStyle}
               src="/images/none-alcoholic.jpg"
               alt="Non-Alcoholic Cocktail"
             />
