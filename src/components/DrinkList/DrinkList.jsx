@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "./DrinkList.css";
 import NoItemsFound from "../../shared-components/NoItemsFound/NoItemsFound";
 import Item from "../../shared-components/Item/Item";
 import CustomButton from "../../shared-components/CustomButton/CustomButton";

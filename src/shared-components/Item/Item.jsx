@@ -1,5 +1,4 @@
-// CocktailItem.js
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const taglineStyle = {
@@ -36,9 +35,33 @@ const nameStyle = {
 };
 
 const Item = ({ drinkType, handleClick, useLink, linkTo }) => {
+  const placeholderImage = "/images/no-image.jpg";
+  const imageUrl = drinkType.imageUrl ? drinkType.imageUrl : placeholderImage;
+
+  // Dodavanje provere kroz stanje komponente
+  const [imgError, setImgError] = useState(false);
+  
+  const handleError = () => {
+    setImgError(true);
+  };
+
   const content = (
     <>
-      <img src={drinkType.imageUrl} alt={drinkType.name} style={imageStyle} />
+      {imgError ? (
+        <img
+          src={placeholderImage}
+          alt={drinkType.name}
+          style={imageStyle}
+          onError={handleError}
+        />
+      ) : (
+        <img
+          src={imageUrl}
+          alt={drinkType.name}
+          style={imageStyle}
+          onError={handleError}
+        />
+      )}
       <h3 style={nameStyle}>{drinkType.name}</h3>
     </>
   );
