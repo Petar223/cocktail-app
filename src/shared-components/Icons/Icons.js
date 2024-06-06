@@ -1,5 +1,5 @@
 // Icons.js
-import React from "react";
+import React from 'react';
 
 export const IconClock = () => (
   <svg
@@ -25,7 +25,7 @@ export const IconHeart = () => (
   </svg>
 );
 
-export const IconDrink = ({ width, height, fill = "currentColor" }) => (
+export const IconDrink = ({ width, height, fill = 'currentColor' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 64 64"

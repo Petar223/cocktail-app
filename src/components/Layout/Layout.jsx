@@ -1,10 +1,16 @@
-import Header from "../Header/Header";
+import React from 'react';
+import Header from '../Header/Header';
+import styled from 'styled-components';
+
+const ContentContainer = styled.div`
+  padding-top: 42px;
+`;
 
 function Layout({ children }) {
   return (
     <div>
       <Header />
-      <div className="content-container">{children}</div>
+      <ContentContainer>{children}</ContentContainer>
     </div>
   );
 }

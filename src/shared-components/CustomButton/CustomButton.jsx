@@ -1,14 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./CustomButton.css";
+import React from 'react';
+import ButtonWrapper from './components/ButtonWrapper';
+import Button from './components/Button';
 
 const CustomButton = ({ to, children }) => {
   return (
-    <div className="custom-button-wrapper">
-      <Link to={to} className="custom-button">
-        {children}
-      </Link>
-    </div>
+    <ButtonWrapper>
+      <Button to={to}>{children}</Button>
+    </ButtonWrapper>
   );
 };
 

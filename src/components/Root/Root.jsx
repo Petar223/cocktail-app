@@ -1,9 +1,10 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import DrinkList from "../DrinkList/DrinkList";
-import CocktailList from "../CoctailList/CocktailList";
-import Layout from "../Layout/Layout";
-import Home from "../Home/Home";
-import TypeSelection from "../TypeSelection/TypeSelection";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import DrinkList from '../DrinkList/DrinkList';
+import CocktailList from '../CoctailList/CocktailList';
+import Layout from '../Layout/Layout';
+import Home from '../Home/Home';
+import TypeSelection from '../TypeSelection/TypeSelection';
+import React from 'react';
 
 function Root() {
   return (

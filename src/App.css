@@ -4,22 +4,3 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
 }
-
-/* header {
-  background-color: #007bff;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  font-size: 24px;
-} */
-
-.container {
-  padding: 20px;
-}
-.content-container {
-  padding-top: 42px; /* Ako je visina headera oko 60px, dodajte malo više za sigurnost */
-}
-/* 
-img {
-  width: 100%;
-} */
