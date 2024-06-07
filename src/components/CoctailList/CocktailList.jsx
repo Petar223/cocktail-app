@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CocktailModal from '../../modals/CocktailModal';
 import NoItemsFound from '../../shared-components/NoItemsFound/NoItemsFound';
@@ -8,55 +7,61 @@ import React from 'react';
 import HeaderContent from '../Header/components/HeaderContent/HeaderContent';
 import ItemContainer from '../../shared-components/styledComponents/ItemContainer/ItemContainer';
 import ModalBackground from '../../modals/components/ModalBackground/ModalBackground';
+import getDrinks from '../../api/rest/drinks/getDrinks';
+import getCocktails from '../../api/rest/drinks/getCoctails';
+import getCocktailById from '../../api/rest/drinks/getCocktailById';
+import useFetch from '../../hooks/useFetch';
+import useLazyFetch from '../../hooks/useLazyFetch';
 
 function CocktailList() {
   const { drinkId, type } = useParams();
-  const [selectedCocktail, setSelectedCocktail] = useState(null);
-  const [cocktails, setCocktails] = useState([]);
-  const [drinks, setDrinks] = useState([]);
   const isAlcoholic = type === 'alcoholic';
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/cocktails`)
-      .then(response => response.json())
-      .then(data => setCocktails(data))
-      .catch(error => console.error('Error fetching cocktails', error));
-  }, [type, drinkId]);
+  const {
+    data: cocktails,
+    loading: loadingCocktails,
+    error: cocktailsError,
+  } = useFetch(getCocktails);
+  const {
+    data: drinks,
+    loading: loadingDrinks,
+    error: drinksError,
+  } = useFetch(getDrinks);
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/drinks`)
-      .then(response => response.json())
-      .then(data => setDrinks(data))
-      .catch(error => console.error('Error fetching drinks', error));
-  }, [type]);
-
-  const filteredCocktails = cocktails.filter(
-    cocktail =>
-      cocktail.alcoholic === isAlcoholic &&
-      cocktail.ingredients.some(ingredient => {
-        console.log(ingredient.drinkId === drinkId);
-        return ingredient.drinkId === drinkId;
-      })
-  );
+  const [
+    runFetchCocktailById,
+    {
+      data: fetchedCocktail,
+      loading: loadingCocktail,
+      error: cocktailError,
+      resetData,
+    },
+  ] = useLazyFetch(getCocktailById);
 
   const handleClick = cocktailId => {
-    fetch(`http://localhost:5000/cocktails/${cocktailId}`)
-      .then(response => response.json())
-      .then(data => {
-        setSelectedCocktail(data);
-      })
-      .catch(error => console.error('Error fetching cocktail details', error));
+    runFetchCocktailById(cocktailId);
   };
 
   const handleClose = () => {
-    setSelectedCocktail(null);
+    resetData();
   };
+
+  if (loadingCocktails || loadingDrinks) return <div>Loading...</div>;
+  if (cocktailsError || drinksError) return <div>Error fetching data</div>;
+
+  const filteredCocktails = cocktails?.filter(
+    cocktail =>
+      cocktail.alcoholic === isAlcoholic &&
+      cocktail.ingredients.some(ingredient => {
+        return ingredient.drinkId === drinkId;
+      })
+  );
 
   return (
     <div>
       <HeaderContent>
         <div>
-          <h3>Coctails</h3>
+          <h3>Cocktails</h3>
         </div>
         <div>
           <CustomButton to={`/type/${type}`}>Back to Drinks</CustomButton>
@@ -76,10 +81,14 @@ function CocktailList() {
           <NoItemsFound message="No cocktails found with this ingredient." />
         )}
       </ItemContainer>
-      {selectedCocktail && (
+      {loadingCocktail && <div>Loading cocktail details...</div>}
+      {cocktailError && (
+        <div>Error fetching cocktail details: {cocktailError.message}</div>
+      )}
+      {fetchedCocktail && (
         <ModalBackground>
           <CocktailModal
-            cocktail={selectedCocktail}
+            cocktail={fetchedCocktail}
             drinks={drinks}
             onClose={handleClose}
           />

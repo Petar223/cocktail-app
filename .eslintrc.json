@@ -5,11 +5,7 @@
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": [
-    "react",
-    "react-hooks",
-    "prettier"
-  ],
+  "plugins": ["react", "react-hooks", "prettier"],
   "env": {
     "browser": true,
     "node": true,
