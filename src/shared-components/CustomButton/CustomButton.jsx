@@ -2,10 +2,14 @@ import React from 'react';
 import ButtonWrapper from './components/ButtonWrapper';
 import Button from './components/Button';
 
-const CustomButton = ({ to, children }) => {
+const CustomButton = ({ to, onClick, children }) => {
   return (
     <ButtonWrapper>
-      <Button to={to}>{children}</Button>
+      {to ? (
+        <Button to={to}>{children}</Button>
+      ) : (
+        <Button onClick={onClick}>{children}</Button>
+      )}
     </ButtonWrapper>
   );
 };

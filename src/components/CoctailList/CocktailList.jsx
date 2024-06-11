@@ -31,7 +31,7 @@ function CocktailList() {
   const [
     runFetchCocktailById,
     {
-      data: fetchedCocktail,
+      data: cocktail,
       loading: loadingCocktail,
       error: cocktailError,
       resetData,
@@ -85,10 +85,10 @@ function CocktailList() {
       {cocktailError && (
         <div>Error fetching cocktail details: {cocktailError.message}</div>
       )}
-      {fetchedCocktail && (
+      {cocktail && (
         <ModalBackground>
           <CocktailModal
-            cocktail={fetchedCocktail}
+            cocktail={cocktail}
             drinks={drinks}
             onClose={handleClose}
           />

@@ -6,7 +6,6 @@ const useFetch = fetchFunction => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log('lkdjfsdfsdf');
     const fetchData = async () => {
       setLoading(true);
       try {
