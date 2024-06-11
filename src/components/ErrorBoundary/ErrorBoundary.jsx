@@ -17,7 +17,6 @@ class ErrorBoundary extends React.Component {
 
   componentDidCatch(error, errorInfo) {
     this.setState({ error, errorInfo });
-    // Možete logovati grešku u eksterni servis za logovanje grešaka
     console.error('Uncaught error:', error, errorInfo);
   }
 
