@@ -4,6 +4,7 @@ import Nav from './components/Nav/Nav';
 import NavContainer from './components/NavContainer/NavContainer';
 import LinkContainer from '../../shared-components/styledComponents/LinkContainer/LinkContainer';
 import NavLink from './components/NavLink/NavLink';
+import ThemeSwitch from '../ThemeSwich/ThemeSwitch';
 
 function Header() {
   return (
@@ -16,6 +17,7 @@ function Header() {
             <NavLink to="/favorites">Favorites</NavLink>
             <NavLink to="/about">About</NavLink>
           </LinkContainer>
+          <ThemeSwitch />
         </NavContainer>
       </Nav>
     </HeaderContainer>

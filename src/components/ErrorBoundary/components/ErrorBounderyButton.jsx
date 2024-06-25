@@ -4,7 +4,7 @@ const Button = styled.button`
   width: 100%;
   border: none;
   padding: 12px 40px;
-  background-color: #4169e1;
+  background-color: ${({ theme }) => theme.primary[500]};
   color: white;
   font-size: 22px;
   text-transform: uppercase;
@@ -25,15 +25,15 @@ const Button = styled.button`
   &:before {
     top: -5px;
     left: -5px;
-    border-top: 2px solid #4169e1;
-    border-left: 2px solid #4169e1;
+    border-top: 2px solid ${({ theme }) => theme.blueAccent[500]};
+    border-left: 2px solid ${({ theme }) => theme.blueAccent[500]};
   }
 
   &:after {
     bottom: -5px;
     right: -5px;
-    border-bottom: 2px solid #4169e1;
-    border-right: 2px solid #4169e1;
+    border-bottom: 2px solid ${({ theme }) => theme.blueAccent[500]};
+    border-right: 2px solid ${({ theme }) => theme.blueAccent[500]};
   }
 
   &:hover:before,

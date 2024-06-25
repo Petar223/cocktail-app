@@ -6,7 +6,7 @@ const HomeContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   padding: 32px;
-  color: white;
+  color: ${({ theme }) => theme.grey[100]};
 `;
 
 export default HomeContainer;

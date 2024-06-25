@@ -6,7 +6,7 @@ const TypeContainer = styled.div`
   align-items: flex-start;
   justify-content: space-evenly;
   padding: 32px;
-  color: white;
+  color: ${({ theme }) => theme.grey[100]};
 `;
 
 export default TypeContainer;
