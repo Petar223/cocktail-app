@@ -13,7 +13,7 @@ const NoItemContainer = styled.div`
   font-size: 1.2em;
   margin: auto;
   width: 500px;
-  background-color: ${({ theme }) => theme.blackOverlay};
+  background-color: ${({ theme }) => theme.grey[800]};
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 `;
