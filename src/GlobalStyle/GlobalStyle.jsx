@@ -4,8 +4,9 @@ const GlobalStyle = createGlobalStyle`
   html, body {
     background: ${({ theme }) => theme.background};
     margin: 0;
-  padding: 0;
-  height: 100%;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
   }
 `;
 

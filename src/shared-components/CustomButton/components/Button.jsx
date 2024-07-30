@@ -12,7 +12,10 @@ const Button = styled(Link)`
   cursor: pointer;
   position: relative;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 
   &:before,
   &:after {

@@ -21,4 +21,5 @@ export const sharedTaglineStyles = css`
   -webkit-backdrop-filter: blur(3px);
   cursor: pointer;
   text-decoration: none;
+  border: 1px solid ${({ theme }) => theme.grey[100]};
 `;

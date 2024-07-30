@@ -5,6 +5,7 @@ import TypeTaglineLarger from './TypeTaglineLarger/TypeTaglineLarger';
 import TypeTagline from './TypeTagline/TypeTagline';
 import TypeButtonContainer from './TypeButtonContainer/TypeButtonContainer';
 import TypeImage from './TypeImage/TypeImage';
+import { IconExplore } from '../../../shared-components/Icons/Icons';
 
 const TypeTaglineComponent = ({
   title,
@@ -21,7 +22,10 @@ const TypeTaglineComponent = ({
           <TypeImage src={imageSrc} alt={imageAlt} />
         </div>
         <TypeButtonContainer>
-          <CustomButton to={buttonLink}>{buttonText}</CustomButton>
+          <CustomButton to={buttonLink}>
+            {buttonText}{' '}
+            <IconExplore width={26} height={26} fill="currentColor" />
+          </CustomButton>
         </TypeButtonContainer>
       </div>
     </TypeTagline>

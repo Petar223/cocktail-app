@@ -14,6 +14,7 @@ function Root() {
           <Route path="/" element={<Home />} />
           <Route path="/type/:type" element={<DrinkList />} />
           <Route path="/type/:type/drink/:drinkId" element={<CocktailList />} />
+          <Route path="/type/all" element={<CocktailList />} />
           <Route path="/browse" element={<TypeSelection />} />
         </Routes>
       </Layout>

@@ -3,15 +3,18 @@ import Header from '../Header/Header';
 import styled from 'styled-components';
 
 const ContentContainer = styled.div`
-  padding-top: 42px;
+  display: flex;
+  justify-content: center;
+  margin-top: 42px;
+  height: 100%;
 `;
 
 function Layout({ children }) {
   return (
-    <div>
+    <>
       <Header />
       <ContentContainer>{children}</ContentContainer>
-    </div>
+    </>
   );
 }
 export default Layout;

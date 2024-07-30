@@ -19,6 +19,13 @@ function TypeSelection() {
         buttonLink="/type/non-alcoholic"
         buttonText="Explore"
       />
+      <TypeTaglineComponent
+        title="All Cocktails"
+        imageSrc="/images/all-cocktails.jpg" // Pretpostavljam da imaš sliku za sve koktele
+        imageAlt="All Cocktails"
+        buttonLink="/type/all"
+        buttonText="Explore"
+      />
     </TypeContainer>
   );
 }

@@ -12,6 +12,14 @@ import getCocktails from '../../api/rest/drinks/getCoctails';
 import getCocktailById from '../../api/rest/drinks/getCocktailById';
 import useFetch from '../../hooks/useFetch';
 import useLazyFetch from '../../hooks/useLazyFetch';
+import { IconAdd, IconBack } from '../../shared-components/Icons/Icons';
+import { ButtonContainer } from '../../shared-components/ButtonContainer/ButtonContainer';
+import Loading from '../../shared-components/Loading/Loading';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  width: 100%;
+`;
 
 function CocktailList() {
   const { drinkId, type } = useParams();
@@ -46,25 +54,48 @@ function CocktailList() {
     resetData();
   };
 
-  if (loadingCocktails || loadingDrinks) return <div>Loading...</div>;
-  if (cocktailsError || drinksError) return <div>Error fetching data</div>;
+  const handleDelete = id => {
+    console.log(`Deleting item with id: ${id}`);
+  };
 
-  const filteredCocktails = cocktails?.filter(
-    cocktail =>
-      cocktail.alcoholic === isAlcoholic &&
-      cocktail.ingredients.some(ingredient => {
-        return ingredient.drinkId === drinkId;
-      })
-  );
+  if (loadingCocktails || loadingDrinks)
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+  if (cocktailsError || drinksError)
+    return (
+      <NoItemsFound message="Something went wrong please try again later." />
+    );
+
+  const filteredCocktails = !type
+    ? cocktails
+    : cocktails?.filter(
+        cocktail =>
+          cocktail.alcoholic === isAlcoholic &&
+          cocktail.ingredients.some(ingredient => {
+            return ingredient.drinkId === drinkId;
+          })
+      );
 
   return (
-    <div>
+    <Container>
       <HeaderContent>
         <div>
           <h3>Cocktails</h3>
         </div>
         <div>
-          <CustomButton to={`/type/${type}`}>Back to Drinks</CustomButton>
+          <ButtonContainer>
+            <CustomButton to={!type ? `/browse` : `/type/${type}`}>
+              <IconBack width={32} height={32} fill="currentColor" />{' '}
+              {!type ? 'Back ot Type' : 'Back to Drinks'}
+            </CustomButton>
+            <CustomButton>
+              <IconAdd width={32} height={32} fill="currentColor" />
+              Add New Coctail{' '}
+            </CustomButton>
+          </ButtonContainer>
         </div>
       </HeaderContent>
       <ItemContainer>
@@ -75,6 +106,7 @@ function CocktailList() {
               drinkType={cocktail}
               handleClick={handleClick}
               useLink={false}
+              handleDelete={handleDelete}
             />
           ))
         ) : (
@@ -94,7 +126,7 @@ function CocktailList() {
           />
         </ModalBackground>
       )}
-    </div>
+    </Container>
   );
 }
 
