@@ -7,6 +7,7 @@ const ItemContainer = styled.div`
   align-items: space-evenly;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 32px;
 `;
 
 export default ItemContainer;

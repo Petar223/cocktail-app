@@ -58,6 +58,10 @@ function CocktailList() {
     console.log(`Deleting item with id: ${id}`);
   };
 
+  const handleEdit = id => {
+    console.log(`Edit item with id: ${id}`);
+  };
+
   if (loadingCocktails || loadingDrinks)
     return (
       <div>
@@ -107,6 +111,7 @@ function CocktailList() {
               handleClick={handleClick}
               useLink={false}
               handleDelete={handleDelete}
+              handleEdit={handleEdit}
             />
           ))
         ) : (

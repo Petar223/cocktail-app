@@ -59,8 +59,20 @@ const tokens = mode => ({
           800: '#2948a0',
           900: '#213d8a',
         },
+        blueLight: {
+          100: '#cceeff',
+          200: '#99ddff',
+          300: '#66ccff',
+          400: '#33bbff',
+          500: '#00bfff',
+          600: '#00ace5',
+          700: '#0099cc',
+          800: '#0087b2',
+          900: '#007499',
+        },
         blackOverlay: 'rgba(10, 10, 10, 0.5)',
         background: 'linear-gradient(to bottom right, #444, #888)',
+        redAccentSharp: '#d32f2f',
       }
     : {
         grey: {
@@ -118,8 +130,20 @@ const tokens = mode => ({
           800: '#c3c6fd',
           900: '#e1e2fe',
         },
+        blueLight: {
+          100: '#007499',
+          200: '#0087b2',
+          300: '#0099cc',
+          400: '#00ace5',
+          500: '#00bfff',
+          600: '#33bbff',
+          700: '#66ccff',
+          800: '#99ddff',
+          900: '#cceeff',
+        },
         blackOverlay: 'rgba(10, 10, 10, 0.5)',
         background: 'linear-gradient(to bottom right, #eee, #ccc)',
+        redAccentSharp: '#d32f2f',
       }),
 });
 

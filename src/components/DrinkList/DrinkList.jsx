@@ -35,6 +35,10 @@ function DrinkList() {
     console.log(`Deleting item with id: ${id}`);
   };
 
+  const handleEdit = id => {
+    console.log(`Edit item with id: ${id}`);
+  };
+
   if (loadingDrinks)
     return (
       <div>
@@ -75,6 +79,7 @@ function DrinkList() {
               useLink={true}
               linkTo={`/type/${type}/drink/${drink._id}`}
               handleDelete={handleDelete}
+              handleEdit={handleEdit}
             />
           ))
         ) : (

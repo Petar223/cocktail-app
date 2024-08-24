@@ -5,8 +5,9 @@ const Button = styled(Link)`
   width: 100%;
   border: none;
   padding: 12px 40px;
-  background-color: ${({ theme }) => theme.blueAccent[500]};
-  color: white;
+  background-color: ${({ theme }) => theme.primary[100]};
+  color: ${({ theme }) =>
+    theme.mode === 'dark' ? theme.grey[100] : theme.grey[900]};
   font-size: 22px;
   text-transform: uppercase;
   cursor: pointer;
@@ -29,15 +30,15 @@ const Button = styled(Link)`
   &:before {
     top: -5px;
     left: -5px;
-    border-top: 2px solid ${({ theme }) => theme.blueAccent[500]};
-    border-left: 2px solid ${({ theme }) => theme.blueAccent[500]};
+    border-top: 2px solid ${({ theme }) => theme.primary[100]};
+    border-left: 2px solid ${({ theme }) => theme.primary[100]};
   }
 
   &:after {
     bottom: -5px;
     right: -5px;
-    border-bottom: 2px solid ${({ theme }) => theme.blueAccent[500]};
-    border-right: 2px solid ${({ theme }) => theme.blueAccent[500]};
+    border-bottom: 2px solid ${({ theme }) => theme.primary[100]};
+    border-right: 2px solid ${({ theme }) => theme.primary[100]};
   }
 
   &:hover:before,
