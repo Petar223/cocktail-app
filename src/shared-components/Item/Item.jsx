@@ -3,68 +3,13 @@ import ItemTaglineLink from './components/ItemTaglineLink';
 import ItemImage from './components/ItemImage';
 import ItemName from './components/ItemName';
 import ItemTagline from './components/ItemTagline';
+import { DeleteButton } from './components/DeleteButton';
+import { EditButton } from './components/EditButton';
+
 import styled from 'styled-components';
 
 const ItemContainer = styled.div`
   position: relative;
-`;
-
-const DeleteButton = styled.button`
-  background-color: ${({ theme }) => theme.redAccentSharp};
-  color: white;
-  border: none;
-  border-radius: 0;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  transition:
-    background-color 0.3s ease,
-    transform 0.2s ease;
-
-  position: absolute;
-  top: 8px;
-  right: 8px;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.redAccentSharp};
-    transform: translateY(-2px);
-  }
-
-  &:active {
-    background-color: ${({ theme }) => theme.redAccentSharp};
-    transform: translateY(0);
-  }
-`;
-
-const EditButton = styled.button`
-  background-color: ${({ theme }) => theme.blueLight[500]};
-  color: white;
-  border: none;
-  border-radius: 0;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  transition:
-    background-color 0.3s ease,
-    transform 0.2s ease;
-
-  position: absolute;
-  top: 8px;
-  left: 8px;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.blueLight[600]};
-    transform: translateY(-2px);
-  }
-
-  &:active {
-    background-color: ${({ theme }) => theme.blueLight[700]};
-    transform: translateY(0);
-  }
 `;
 
 const Item = ({

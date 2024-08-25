@@ -22,4 +22,12 @@ export const sharedTaglineStyles = css`
   cursor: pointer;
   text-decoration: none;
   border: 1px solid ${({ theme }) => theme.grey[100]};
+  transition:
+    border-radius 1s ease,
+    transform 0.3s ease;
+
+  &:hover {
+    border-radius: 0;
+    transform: scale(1.02);
+  }
 `;
