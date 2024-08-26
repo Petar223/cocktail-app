@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 export const DeleteButton = styled.button`
   background-color: ${({ theme }) => theme.redAccentSharp};
+  width: 66px;
+  display: flex;
+  justify-content: center;
   color: white;
   border: none;
   border-radius: 0;

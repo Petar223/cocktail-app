@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Loading from '../../shared-components/Loading/Loading';
 import Layout from '../Layout/Layout';
+import Loading from '../../shared-components/Loading/Loading';
 import {
   Home,
   DrinkList,

@@ -21,10 +21,10 @@ function CocktailModal({ cocktail, drinks, onClose }) {
         <ModalIngredientList>
           {cocktail.ingredients.map((ingredient, index) => (
             <ModalIngredientItem
-              key={ingredient.drinkId}
-              isLast={index === cocktail.ingredients.length - 1}
+              key={ingredient._id}
+              $isLast={index === cocktail.ingredients.length - 1}
             >
-              {getDrinkName(ingredient.drinkId)}: {ingredient.quantity}{' '}
+              {getDrinkName(ingredient._id)}: {ingredient.quantity}{' '}
               {ingredient.unit}
             </ModalIngredientItem>
           ))}

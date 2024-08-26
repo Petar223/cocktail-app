@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NoItemsFound from '../../shared-components/NoItemsFound/NoItemsFound';
 import Item from '../../shared-components/Item/Item';
@@ -8,7 +8,9 @@ import ItemContainer from '../../shared-components/styledComponents/ItemContaine
 import { ButtonContainer } from '../../shared-components/ButtonContainer/ButtonContainer';
 import { IconAdd, IconBack } from '../../shared-components/Icons/Icons';
 import useFetch from '../../hooks/useFetch';
+import useLazyFetch from '../../hooks/useLazyFetch';
 import getDrinks from '../../api/rest/drinks/getDrinks';
+import deleteDrink from '../../api/rest/drinks/deleteDrink';
 import Loading from '../../shared-components/Loading/Loading';
 import styled from 'styled-components';
 
@@ -18,12 +20,24 @@ const Container = styled.div`
 
 function DrinkList() {
   const { type } = useParams();
+  const [deleteId, setDeleteId] = useState(null);
 
   const {
     data: drinks,
     loading: loadingDrinks,
     error: drinksError,
+    setData,
   } = useFetch(getDrinks);
+
+  const [runDeleteDrink, { loading: isDeleting, error: deleteError }] =
+    useLazyFetch(deleteDrink);
+
+  useEffect(() => {
+    if (!isDeleting && !deleteError && deleteId !== null) {
+      setData(prevData => prevData.filter(drink => drink._id !== deleteId));
+      setDeleteId(null);
+    }
+  }, [isDeleting, deleteError, deleteId, setData]);
 
   const filteredDrinks = drinks?.filter(
     drink =>
@@ -32,7 +46,8 @@ function DrinkList() {
   );
 
   const handleDelete = id => {
-    console.log(`Deleting item with id: ${id}`);
+    setDeleteId(id);
+    runDeleteDrink(id);
   };
 
   const handleEdit = id => {
@@ -70,6 +85,10 @@ function DrinkList() {
           </ButtonContainer>
         </div>
       </HeaderContent>
+
+      {isDeleting && <div> Deleting</div>}
+      {deleteError && <div>Error Delete: {deleteError.message}</div>}
+
       <ItemContainer>
         {filteredDrinks.length > 0 ? (
           filteredDrinks?.map(drink => (
@@ -80,6 +99,7 @@ function DrinkList() {
               linkTo={`/type/${type}/drink/${drink._id}`}
               handleDelete={handleDelete}
               handleEdit={handleEdit}
+              isDeleting={isDeleting}
             />
           ))
         ) : (

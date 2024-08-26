@@ -5,6 +5,7 @@ import ItemName from './components/ItemName';
 import ItemTagline from './components/ItemTagline';
 import { DeleteButton } from './components/DeleteButton';
 import { EditButton } from './components/EditButton';
+import { Spinner } from '../Spinner/Spinner';
 
 import styled from 'styled-components';
 
@@ -19,6 +20,7 @@ const Item = ({
   linkTo,
   handleDelete,
   handleEdit,
+  isDeleting,
 }) => {
   const [imgError, setImgError] = useState(false);
   const [loading, setLoading] = useState(true); // Dodaj loading stanje
@@ -49,12 +51,12 @@ const Item = ({
   useEffect(() => {
     const img = new Image();
     img.src = imageUrl;
-    img.onload = handleLoad; // Kada se slika učita, pozovi handleLoad
-    img.onerror = handleError; // Ako dođe do greške pri učitavanju, pozovi handleError
+    img.onload = handleLoad;
+    img.onerror = handleError;
   }, [imageUrl]);
 
   if (loading) {
-    return null; // Dok se slika učitava, ne renderuj ništa
+    return null;
   }
 
   const content = (
@@ -65,7 +67,7 @@ const Item = ({
         onError={handleError}
       />
       <DeleteButton onClick={event => handleDeleteClick(event, drinkType._id)}>
-        Delete
+        {isDeleting ? <Spinner /> : 'Delete'}
       </DeleteButton>
       <EditButton onClick={event => handleEditClick(event, drinkType._id)}>
         Edit

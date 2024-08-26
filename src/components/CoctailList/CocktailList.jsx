@@ -1,15 +1,16 @@
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CocktailModal from '../../modals/CocktailModal';
+import CocktailModal from '../../modals/CocktailDetailsModal';
 import NoItemsFound from '../../shared-components/NoItemsFound/NoItemsFound';
 import Item from '../../shared-components/Item/Item';
 import CustomButton from '../../shared-components/CustomButton/CustomButton';
-import React from 'react';
 import HeaderContent from '../Header/components/HeaderContent/HeaderContent';
 import ItemContainer from '../../shared-components/styledComponents/ItemContainer/ItemContainer';
 import ModalBackground from '../../modals/components/ModalBackground/ModalBackground';
 import getDrinks from '../../api/rest/drinks/getDrinks';
 import getCocktails from '../../api/rest/drinks/getCoctails';
 import getCocktailById from '../../api/rest/drinks/getCocktailById';
+import deleteCocktail from '../../api/rest/drinks/deleteCocktail';
 import useFetch from '../../hooks/useFetch';
 import useLazyFetch from '../../hooks/useLazyFetch';
 import { IconAdd, IconBack } from '../../shared-components/Icons/Icons';
@@ -23,13 +24,16 @@ const Container = styled.div`
 
 function CocktailList() {
   const { drinkId, type } = useParams();
+  const [deleteId, setDeleteId] = useState(null);
   const isAlcoholic = type === 'alcoholic';
 
   const {
     data: cocktails,
     loading: loadingCocktails,
     error: cocktailsError,
+    setData,
   } = useFetch(getCocktails);
+
   const {
     data: drinks,
     loading: loadingDrinks,
@@ -46,6 +50,16 @@ function CocktailList() {
     },
   ] = useLazyFetch(getCocktailById);
 
+  const [runDeleteCocktail, { loading: isDeleting, error: deleteError }] =
+    useLazyFetch(deleteCocktail);
+
+  useEffect(() => {
+    if (!isDeleting && !deleteError && deleteId !== null) {
+      setData(prevData => prevData.filter(drink => drink._id !== deleteId));
+      setDeleteId(null);
+    }
+  }, [isDeleting, deleteError, deleteId, setData]);
+
   const handleClick = cocktailId => {
     runFetchCocktailById(cocktailId);
   };
@@ -55,12 +69,23 @@ function CocktailList() {
   };
 
   const handleDelete = id => {
-    console.log(`Deleting item with id: ${id}`);
+    setDeleteId(id);
+    runDeleteCocktail(id);
   };
 
   const handleEdit = id => {
     console.log(`Edit item with id: ${id}`);
   };
+
+  const filteredCocktails = !type
+    ? cocktails
+    : cocktails?.filter(
+        cocktail =>
+          cocktail.alcoholic === isAlcoholic &&
+          cocktail.ingredients.some(ingredient => {
+            return ingredient._id === drinkId;
+          })
+      );
 
   if (loadingCocktails || loadingDrinks)
     return (
@@ -72,16 +97,6 @@ function CocktailList() {
     return (
       <NoItemsFound message="Something went wrong please try again later." />
     );
-
-  const filteredCocktails = !type
-    ? cocktails
-    : cocktails?.filter(
-        cocktail =>
-          cocktail.alcoholic === isAlcoholic &&
-          cocktail.ingredients.some(ingredient => {
-            return ingredient.drinkId === drinkId;
-          })
-      );
 
   return (
     <Container>
@@ -118,6 +133,10 @@ function CocktailList() {
           <NoItemsFound message="No cocktails found with this ingredient." />
         )}
       </ItemContainer>
+
+      {isDeleting && <div> Deleting</div>}
+      {deleteError && <div>Error Delete: {deleteError.message}</div>}
+
       {loadingCocktail && <div>Loading cocktail details...</div>}
       {cocktailError && (
         <div>Error fetching cocktail details: {cocktailError.message}</div>

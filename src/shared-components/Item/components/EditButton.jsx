@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 export const EditButton = styled.button`
   background-color: ${({ theme }) => theme.blueLight[500]};
+  width: 66px;
+  display: flex;
+  justify-content: center;
   color: white;
   border: none;
   border-radius: 0;
