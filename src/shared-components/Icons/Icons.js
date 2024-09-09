@@ -13,18 +13,6 @@ export const IconClock = () => (
   </svg>
 );
 
-export const IconHeart = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    width="24"
-    height="24"
-    fill="currentColor"
-  >
-    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-  </svg>
-);
-
 export const IconDrink = ({ width, height, fill = 'currentColor' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -70,5 +58,42 @@ export const IconExplore = ({ width, height, fill = 'currentColor' }) => (
     fill={fill}
   >
     <path d="m260-260 300-140 140-300-300 140-140 300Zm220-180q-17 0-28.5-11.5T440-480q0-17 11.5-28.5T480-520q17 0 28.5 11.5T520-480q0 17-11.5 28.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
+  </svg>
+);
+
+export const IconInfo = ({ width, height, fill = 'currentColor' }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={width}
+    height={height}
+    fill={fill}
+  >
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.88-13.5h1.75v1.75h-1.75V6.5zm2.63 3.88v6.24h-1.75v-4.5h-1.25v-1.75h3v6.24z" />
+  </svg>
+);
+
+export const IconHeart = ({
+  filled,
+  width = 24,
+  height = 24,
+  fill = 'currentColor',
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={width}
+    height={height}
+    fill={filled ? fill : 'none'}
+    stroke={fill}
+    strokeWidth="2"
+  >
+    <path
+      d={
+        filled
+          ? 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'
+          : 'M12.1 8.64l-.1.1-.1-.1c-1.45-1.43-3.8-1.44-5.25.04-1.56 1.63-1.68 4.22-.1 5.94L12 21.35l5.45-6.63c1.58-1.72 1.46-4.31-.1-5.94-1.45-1.48-3.8-1.47-5.25-.04z'
+      }
+    />
   </svg>
 );

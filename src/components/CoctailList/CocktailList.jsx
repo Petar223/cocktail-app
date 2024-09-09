@@ -117,6 +117,7 @@ function CocktailList() {
           </ButtonContainer>
         </div>
       </HeaderContent>
+
       <ItemContainer>
         {filteredCocktails.length > 0 ? (
           filteredCocktails?.map(cocktail => (
@@ -127,6 +128,7 @@ function CocktailList() {
               useLink={false}
               handleDelete={handleDelete}
               handleEdit={handleEdit}
+              handleFavoriteClick={e => console.log(e.target.value)}
             />
           ))
         ) : (

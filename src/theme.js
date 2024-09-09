@@ -71,7 +71,7 @@ const tokens = mode => ({
           900: '#007499',
         },
         blackOverlay: 'rgba(10, 10, 10, 0.5)',
-        background: 'linear-gradient(to bottom right, #444, #888)',
+        background: '#888',
         redAccentSharp: '#d32f2f',
       }
     : {
@@ -142,7 +142,7 @@ const tokens = mode => ({
           900: '#cceeff',
         },
         blackOverlay: 'rgba(10, 10, 10, 0.5)',
-        background: 'linear-gradient(to bottom right, #eee, #ccc)',
+        background: ' #eee',
         redAccentSharp: '#d32f2f',
       }),
 });

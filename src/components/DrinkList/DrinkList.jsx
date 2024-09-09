@@ -6,7 +6,11 @@ import CustomButton from '../../shared-components/CustomButton/CustomButton';
 import HeaderContent from '../Header/components/HeaderContent/HeaderContent';
 import ItemContainer from '../../shared-components/styledComponents/ItemContainer/ItemContainer';
 import { ButtonContainer } from '../../shared-components/ButtonContainer/ButtonContainer';
-import { IconAdd, IconBack } from '../../shared-components/Icons/Icons';
+import {
+  IconAdd,
+  IconBack,
+  IconInfo,
+} from '../../shared-components/Icons/Icons';
 import useFetch from '../../hooks/useFetch';
 import useLazyFetch from '../../hooks/useLazyFetch';
 import getDrinks from '../../api/rest/drinks/getDrinks';
@@ -16,6 +20,57 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
+`;
+
+const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+
+const Title = styled.h3`
+  margin-right: 10px;
+`;
+
+const InfoText = styled.p`
+  display: flex;
+  font-size: 14px;
+  margin: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0s linear 0.3s;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  white-space: wrap;
+  background-color: ${({ theme }) => theme.grey[800]};
+  color: ${({ theme }) => theme.grey[100]};
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px ${({ theme }) => theme.blackOverlay};
+  z-index: 1000;
+  width: 350px;
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &:hover ${InfoText} {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+  }
+`;
+
+const IconContainer = styled.div`
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 `;
 
 function DrinkList() {
@@ -69,21 +124,29 @@ function DrinkList() {
   return (
     <Container>
       <HeaderContent>
-        <div>
-          <h3>Drinks</h3>
-        </div>
-        <div>
-          <ButtonContainer>
-            <CustomButton to={`/browse`}>
-              <IconBack width={32} height={32} fill="currentColor" />
-              Back to type
-            </CustomButton>
-            <CustomButton>
-              <IconAdd width={32} height={32} fill="currentColor" />
-              Add New Drink{' '}
-            </CustomButton>
-          </ButtonContainer>
-        </div>
+        <HeaderContainer>
+          <Title>Drinks</Title>
+          <InfoContainer>
+            <IconContainer>
+              <IconInfo width={24} height={24} fill="currentColor" />
+            </IconContainer>
+            <InfoText>
+              Please select a drink from the list below that you like to use as
+              the base for your perfect cocktail creation!
+            </InfoText>
+          </InfoContainer>
+        </HeaderContainer>
+
+        <ButtonContainer>
+          <CustomButton to={`/browse`}>
+            <IconBack width={32} height={32} fill="currentColor" />
+            Back to type
+          </CustomButton>
+          <CustomButton>
+            <IconAdd width={32} height={32} fill="currentColor" />
+            Add New Drink{' '}
+          </CustomButton>
+        </ButtonContainer>
       </HeaderContent>
 
       {isDeleting && <div> Deleting</div>}

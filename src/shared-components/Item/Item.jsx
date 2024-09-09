@@ -6,12 +6,31 @@ import ItemTagline from './components/ItemTagline';
 import { DeleteButton } from './components/DeleteButton';
 import { EditButton } from './components/EditButton';
 import { Spinner } from '../Spinner/Spinner';
-
+import { IconHeart } from '../Icons/Icons';
 import styled from 'styled-components';
 
 const ItemContainer = styled.div`
   position: relative;
 `;
+
+const StyledButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+const FavoriteButton = ({ isFavorite, onClick }) => (
+  <StyledButton onClick={onClick}>
+    <IconHeart filled={isFavorite} fill={isFavorite ? 'red' : 'gray'} />
+  </StyledButton>
+);
 
 const Item = ({
   drinkType,
@@ -21,9 +40,10 @@ const Item = ({
   handleDelete,
   handleEdit,
   isDeleting,
+  handleFavoriteClick,
 }) => {
   const [imgError, setImgError] = useState(false);
-  const [loading, setLoading] = useState(true); // Dodaj loading stanje
+  const [loading, setLoading] = useState(true);
 
   const placeholderImage = '/images/no-image.jpg';
   const imageUrl = drinkType.imageUrl ? drinkType.imageUrl : placeholderImage;
@@ -33,7 +53,7 @@ const Item = ({
   };
 
   const handleLoad = () => {
-    setLoading(false); // Kada se slika učita, postavi loading na false
+    setLoading(false);
   };
 
   const handleDeleteClick = (event, id) => {
@@ -72,6 +92,11 @@ const Item = ({
       <EditButton onClick={event => handleEditClick(event, drinkType._id)}>
         Edit
       </EditButton>
+
+      {/* <FavoriteButton onClick={() => handleFavoriteClick(drinkType._id)}>
+        <IconHeart />
+      </FavoriteButton> */}
+
       <ItemName>{drinkType.name}</ItemName>
     </ItemContainer>
   );
