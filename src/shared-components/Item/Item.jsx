@@ -6,31 +6,18 @@ import ItemTagline from './components/ItemTagline';
 import { DeleteButton } from './components/DeleteButton';
 import { EditButton } from './components/EditButton';
 import { Spinner } from '../Spinner/Spinner';
-import { IconHeart } from '../Icons/Icons';
 import styled from 'styled-components';
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 
 const ItemContainer = styled.div`
   position: relative;
 `;
 
-const StyledButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
+const NameWrapper = styled.div`
   display: flex;
-  align-items: center;
-
-  &:hover {
-    opacity: 0.7;
-  }
+  justify-content: space-between;
+  width: 100%;
 `;
-
-const FavoriteButton = ({ isFavorite, onClick }) => (
-  <StyledButton onClick={onClick}>
-    <IconHeart filled={isFavorite} fill={isFavorite ? 'red' : 'gray'} />
-  </StyledButton>
-);
 
 const Item = ({
   drinkType,
@@ -40,7 +27,7 @@ const Item = ({
   handleDelete,
   handleEdit,
   isDeleting,
-  handleFavoriteClick,
+  handleFavorite,
 }) => {
   const [imgError, setImgError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -68,6 +55,12 @@ const Item = ({
     handleEdit(id);
   };
 
+  const handleFavoriteClick = (event, id) => {
+    event.preventDefault();
+    event.stopPropagation();
+    handleFavorite(id);
+  };
+
   useEffect(() => {
     const img = new Image();
     img.src = imageUrl;
@@ -93,11 +86,12 @@ const Item = ({
         Edit
       </EditButton>
 
-      {/* <FavoriteButton onClick={() => handleFavoriteClick(drinkType._id)}>
-        <IconHeart />
-      </FavoriteButton> */}
-
-      <ItemName>{drinkType.name}</ItemName>
+      <NameWrapper>
+        <ItemName>{drinkType.name}</ItemName>
+        <FavoriteButton
+          onClick={event => handleFavoriteClick(event, drinkType._id)}
+        />
+      </NameWrapper>
     </ItemContainer>
   );
 

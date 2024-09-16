@@ -17,6 +17,11 @@ import getDrinks from '../../api/rest/drinks/getDrinks';
 import deleteDrink from '../../api/rest/drinks/deleteDrink';
 import Loading from '../../shared-components/Loading/Loading';
 import styled from 'styled-components';
+import {
+  InfoContainer,
+  InfoText,
+  IconContainer,
+} from '../../shared-components/InfoTooltip/infoTolltip';
 
 const Container = styled.div`
   width: 100%;
@@ -30,47 +35,6 @@ const HeaderContainer = styled.div`
 
 const Title = styled.h3`
   margin-right: 10px;
-`;
-
-const InfoText = styled.p`
-  display: flex;
-  font-size: 14px;
-  margin: 0;
-  visibility: hidden;
-  opacity: 0;
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0s linear 0.3s;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  white-space: wrap;
-  background-color: ${({ theme }) => theme.grey[800]};
-  color: ${({ theme }) => theme.grey[100]};
-  padding: 8px 12px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px ${({ theme }) => theme.blackOverlay};
-  z-index: 1000;
-  width: 350px;
-`;
-
-const InfoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-
-  &:hover ${InfoText} {
-    visibility: visible;
-    opacity: 1;
-    transition-delay: 0s;
-  }
-`;
-
-const IconContainer = styled.div`
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
 `;
 
 function DrinkList() {
@@ -107,6 +71,10 @@ function DrinkList() {
 
   const handleEdit = id => {
     console.log(`Edit item with id: ${id}`);
+  };
+
+  const handleFavorite = id => {
+    console.log(`Favorite clicked for drink with id: ${id}`);
   };
 
   if (loadingDrinks)
@@ -162,6 +130,7 @@ function DrinkList() {
               linkTo={`/type/${type}/drink/${drink._id}`}
               handleDelete={handleDelete}
               handleEdit={handleEdit}
+              handleFavorite={handleFavorite}
               isDeleting={isDeleting}
             />
           ))

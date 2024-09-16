@@ -73,27 +73,35 @@ export const IconInfo = ({ width, height, fill = 'currentColor' }) => (
   </svg>
 );
 
-export const IconHeart = ({
-  filled,
-  width = 24,
-  height = 24,
-  fill = 'currentColor',
+export const IconHeart = ({ width, height, fill = 'currentColor' }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={width}
+    height={height}
+    fill={fill}
+  >
+    <path d="M12.1 8.64l-.1.1-.1-.1c-1.45-1.43-3.8-1.44-5.25.04-1.56 1.63-1.68 4.22-.1 5.94L12 21.35l5.45-6.63c1.58-1.72 1.46-4.31-.1-5.94-1.45-1.48-3.8-1.47-5.25-.04z" />
+  </svg>
+);
+
+export const IconHeartOutline = ({
+  width,
+  height,
+  stroke = 'currentColor',
+  strokeWidth = 1.2,
 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     width={width}
     height={height}
-    fill={filled ? fill : 'none'}
-    stroke={fill}
-    strokeWidth="2"
+    fill="none"
+    stroke={stroke}
+    strokeWidth={strokeWidth}
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
-    <path
-      d={
-        filled
-          ? 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'
-          : 'M12.1 8.64l-.1.1-.1-.1c-1.45-1.43-3.8-1.44-5.25.04-1.56 1.63-1.68 4.22-.1 5.94L12 21.35l5.45-6.63c1.58-1.72 1.46-4.31-.1-5.94-1.45-1.48-3.8-1.47-5.25-.04z'
-      }
-    />
+    <path d="M12.1 8.64l-.1.1-.1-.1c-1.45-1.43-3.8-1.44-5.25.04-1.56 1.63-1.68 4.22-.1 5.94L12 21.35l5.45-6.63c1.58-1.72 1.46-4.31-.1-5.94-1.45-1.48-3.8-1.47-5.25-.04z" />
   </svg>
 );

@@ -77,6 +77,10 @@ function CocktailList() {
     console.log(`Edit item with id: ${id}`);
   };
 
+  const handleFavorite = id => {
+    console.log(`Favorite clicked for drink with id: ${id}`);
+  };
+
   const filteredCocktails = !type
     ? cocktails
     : cocktails?.filter(
@@ -128,7 +132,7 @@ function CocktailList() {
               useLink={false}
               handleDelete={handleDelete}
               handleEdit={handleEdit}
-              handleFavoriteClick={e => console.log(e.target.value)}
+              handleFavorite={handleFavorite}
             />
           ))
         ) : (
