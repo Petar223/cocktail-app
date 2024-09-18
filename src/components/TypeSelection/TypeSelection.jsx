@@ -21,7 +21,7 @@ function TypeSelection() {
       />
       <TypeTaglineComponent
         title="All Cocktails"
-        imageSrc="/images/all-cocktails.jpg" // Pretpostavljam da imaš sliku za sve koktele
+        imageSrc="/images/all-cocktails.jpg"
         imageAlt="All Cocktails"
         buttonLink="/type/all"
         buttonText="Explore"

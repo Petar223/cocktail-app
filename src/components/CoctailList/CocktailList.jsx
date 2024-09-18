@@ -17,6 +17,7 @@ import { IconAdd, IconBack } from '../../shared-components/Icons/Icons';
 import { ButtonContainer } from '../../shared-components/ButtonContainer/ButtonContainer';
 import Loading from '../../shared-components/Loading/Loading';
 import styled from 'styled-components';
+import useUserRole from '../../hooks/useUserRole';
 
 const Container = styled.div`
   width: 100%;
@@ -25,6 +26,7 @@ const Container = styled.div`
 function CocktailList() {
   const { drinkId, type } = useParams();
   const [deleteId, setDeleteId] = useState(null);
+  const userRole = useUserRole();
   const isAlcoholic = type === 'alcoholic';
 
   const {
@@ -114,10 +116,12 @@ function CocktailList() {
               <IconBack width={32} height={32} fill="currentColor" />{' '}
               {!type ? 'Back ot Type' : 'Back to Drinks'}
             </CustomButton>
-            <CustomButton>
-              <IconAdd width={32} height={32} fill="currentColor" />
-              Add New Coctail{' '}
-            </CustomButton>
+            {(userRole === 'admin' || userRole === 'general') && (
+              <CustomButton>
+                <IconAdd width={32} height={32} fill="currentColor" />
+                Add New Coctail{' '}
+              </CustomButton>
+            )}
           </ButtonContainer>
         </div>
       </HeaderContent>

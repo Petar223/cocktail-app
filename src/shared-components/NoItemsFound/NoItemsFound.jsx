@@ -1,4 +1,3 @@
-// NoItemsFound.js
 import React from 'react';
 import { IconDrink } from '../Icons/Icons';
 import NoItemContainer from './components/NoItemContainer';

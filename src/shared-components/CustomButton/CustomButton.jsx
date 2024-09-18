@@ -1,14 +1,15 @@
 import React from 'react';
 import ButtonWrapper from './components/ButtonWrapper';
 import Button from './components/Button';
+import Loader from '../Loader/Loader';
 
-const CustomButton = ({ to, onClick, children }) => {
+const CustomButton = ({ to, onClick, children, isLoading }) => {
   return (
     <ButtonWrapper>
       {to ? (
-        <Button to={to}>{children}</Button>
+        <Button to={to}>{isLoading ? <Loader /> : children}</Button>
       ) : (
-        <Button onClick={onClick}>{children}</Button>
+        <Button onClick={onClick}>{isLoading ? <Loader /> : children}</Button>
       )}
     </ButtonWrapper>
   );

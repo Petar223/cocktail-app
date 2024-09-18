@@ -1,6 +1,5 @@
 import { createContext, useState, useMemo, useContext } from 'react';
 
-// Definisanje palete boja
 const tokens = mode => ({
   ...(mode === 'dark'
     ? {

@@ -1,4 +1,3 @@
-// TypeTaglineComponent.js
 import React from 'react';
 import CustomButton from '../../../shared-components/CustomButton/CustomButton';
 import TypeTaglineLarger from './TypeTaglineLarger/TypeTaglineLarger';

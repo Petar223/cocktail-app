@@ -22,6 +22,7 @@ import {
   InfoText,
   IconContainer,
 } from '../../shared-components/InfoTooltip/infoTolltip';
+import useUserRole from '../../hooks/useUserRole';
 
 const Container = styled.div`
   width: 100%;
@@ -40,6 +41,7 @@ const Title = styled.h3`
 function DrinkList() {
   const { type } = useParams();
   const [deleteId, setDeleteId] = useState(null);
+  const userRole = useUserRole();
 
   const {
     data: drinks,
@@ -110,10 +112,12 @@ function DrinkList() {
             <IconBack width={32} height={32} fill="currentColor" />
             Back to type
           </CustomButton>
-          <CustomButton>
-            <IconAdd width={32} height={32} fill="currentColor" />
-            Add New Drink{' '}
-          </CustomButton>
+          {(userRole === 'admin' || userRole === 'general') && (
+            <CustomButton>
+              <IconAdd width={32} height={32} fill="currentColor" />
+              Add New Drink{' '}
+            </CustomButton>
+          )}
         </ButtonContainer>
       </HeaderContent>
 

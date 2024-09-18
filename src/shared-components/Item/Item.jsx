@@ -8,6 +8,7 @@ import { EditButton } from './components/EditButton';
 import { Spinner } from '../Spinner/Spinner';
 import styled from 'styled-components';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
+import useUserRole from '../../hooks/useUserRole';
 
 const ItemContainer = styled.div`
   position: relative;
@@ -31,6 +32,7 @@ const Item = ({
 }) => {
   const [imgError, setImgError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const userRole = useUserRole();
 
   const placeholderImage = '/images/no-image.jpg';
   const imageUrl = drinkType.imageUrl ? drinkType.imageUrl : placeholderImage;
@@ -79,12 +81,18 @@ const Item = ({
         alt={drinkType.name}
         onError={handleError}
       />
-      <DeleteButton onClick={event => handleDeleteClick(event, drinkType._id)}>
-        {isDeleting ? <Spinner /> : 'Delete'}
-      </DeleteButton>
-      <EditButton onClick={event => handleEditClick(event, drinkType._id)}>
-        Edit
-      </EditButton>
+      {userRole === 'admin' && (
+        <DeleteButton
+          onClick={event => handleDeleteClick(event, drinkType._id)}
+        >
+          {isDeleting ? <Spinner /> : 'Delete'}
+        </DeleteButton>
+      )}
+      {(userRole === 'admin' || userRole === 'general') && (
+        <EditButton onClick={event => handleEditClick(event, drinkType._id)}>
+          Edit
+        </EditButton>
+      )}
 
       <NameWrapper>
         <ItemName>{drinkType.name}</ItemName>

@@ -1,4 +1,3 @@
-// Icons.js
 import React from 'react';
 
 export const IconClock = () => (

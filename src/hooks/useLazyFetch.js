@@ -1,4 +1,3 @@
-// src/hooks/useLazyFetch.js
 import { useState, useCallback } from 'react';
 
 const useLazyFetch = fetchFunction => {
