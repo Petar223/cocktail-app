@@ -15,51 +15,75 @@ const labelFocus = keyframes`
 const InputWrapper = styled.div`
   position: relative;
   width: 100%;
+  height: 60px;
 `;
 
 const InputLabel = styled.label`
   position: absolute;
   top: 50%;
   left: 15px;
-  transform: translateY(-50%);
-  color: #999;
+  transform: translateY(-75%);
+  color: ${({ theme }) => theme.grey[500]};
   transition: 0.3s;
   font-size: 14px;
 
-  ${({ isFocused }) =>
-    isFocused &&
+  ${({ $isFocusedOrFilled, theme }) =>
+    $isFocusedOrFilled &&
     css`
       animation: ${labelFocus} 0.3s ease forwards;
-      color: #007bff;
+      color: ${theme.grey[100]};
     `}
 `;
 
 const StyledInput = styled.input`
   width: 100%;
   padding: 15px 20px;
-  border: 2px solid ${({ hasError }) => (hasError ? '#ff4d4d' : '#ccc')};
+  border: 2px solid
+    ${({ hasError, theme }) =>
+      hasError
+        ? theme.redAccent[500]
+        : theme.mode === 'dark'
+          ? theme.grey[900]
+          : theme.grey[100]};
   border-radius: 5px;
   font-size: 16px;
   outline: none;
   transition: 0.3s;
 
   &:focus {
-    border-color: ${({ hasError }) => (hasError ? '#ff4d4d' : '#007bff')};
+    border-color: ${({ hasError, theme }) =>
+      hasError ? theme.redAccent[500] : theme.grey[100]};
   }
 
   &:focus + ${InputLabel} {
-    color: #007bff;
+    color: ${({ theme }) => theme.grey[100]};
   }
 `;
 
 const ErrorMessage = styled.span`
-  color: #ff4d4d;
-  font-size: 12px;
-  margin-top: 10px;
+  color: ${({ theme }) => theme.redAccent[500]};
+  font-size: 14px;
+  margin: 10px;
 `;
 
-const InputField = ({ id, label, register, hasError, errors, ...props }) => {
+const InputField = ({
+  id,
+  label,
+  register,
+  hasError,
+  errors,
+  value,
+  ...props
+}) => {
   const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
 
   return (
     <InputWrapper>
@@ -67,11 +91,13 @@ const InputField = ({ id, label, register, hasError, errors, ...props }) => {
         id={id}
         hasError={hasError}
         {...register(id, { required: true })}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         {...props}
       />
-      <InputLabel isFocused={isFocused || hasError}>{label}</InputLabel>
+      <InputLabel $isFocusedOrFilled={isFocused || value || hasError}>
+        {label}
+      </InputLabel>
       {hasError && (
         <ErrorMessage>
           {errors[id]?.message || 'This field is required'}

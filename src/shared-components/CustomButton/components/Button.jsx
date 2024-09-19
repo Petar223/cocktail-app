@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Button = styled(Link)`
   width: 100%;
+  min-width: 100px;
   border: none;
   padding: 12px 40px;
   background-color: ${({ theme }) => theme.primary[100]};

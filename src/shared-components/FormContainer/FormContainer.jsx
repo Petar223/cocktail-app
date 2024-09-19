@@ -8,10 +8,14 @@ const FormContainer = styled.form`
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.grey[900]};
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px ${({ theme }) => theme.blackOverlay};
+  color: ${({ theme }) => theme.grey[900]};
+  border: 2px solid
+    ${({ theme }) =>
+      theme.mode === 'dark' ? theme.grey[900] : theme.grey[100]};
 `;
 
 export default FormContainer;
