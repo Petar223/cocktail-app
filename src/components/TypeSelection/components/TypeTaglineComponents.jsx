@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CustomButton from '../../../shared-components/CustomButton/CustomButton';
 import TypeTaglineLarger from './TypeTaglineLarger/TypeTaglineLarger';
 import TypeTagline from './TypeTagline/TypeTagline';
 import TypeButtonContainer from './TypeButtonContainer/TypeButtonContainer';
 import TypeImage from './TypeImage/TypeImage';
 import { IconExplore } from '../../../shared-components/Icons/Icons';
+import { Spinner } from '../../../shared-components/Spinner/Spinner';
 
 const TypeTaglineComponent = ({
   title,
@@ -13,12 +14,35 @@ const TypeTaglineComponent = ({
   buttonLink,
   buttonText,
 }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [imgError, setImgError] = useState(false);
+
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
+  const handleImageError = () => {
+    setImgError(true);
+    setIsLoading(false);
+  };
+
   return (
     <TypeTagline>
       <div>
         <TypeTaglineLarger>{title}</TypeTaglineLarger>
         <div>
-          <TypeImage src={imageSrc} alt={imageAlt} />
+          {isLoading && <Spinner />}
+          {!imgError ? (
+            <TypeImage
+              src={imageSrc}
+              alt={imageAlt}
+              onLoad={handleImageLoad}
+              onError={handleImageError}
+              style={{ display: isLoading ? 'none' : 'block' }}
+            />
+          ) : (
+            <p>Image failed to load</p>
+          )}
         </div>
         <TypeButtonContainer>
           <CustomButton to={buttonLink}>

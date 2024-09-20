@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import axiosInstance from '../../api/rest/axios';
+import Loading from '../../shared-components/Loading/Loading';
 
 const PrivateRoute = ({ children, requiredRole }) => {
   const [isAuthorized, setIsAuthorized] = useState(null);
@@ -31,7 +32,11 @@ const PrivateRoute = ({ children, requiredRole }) => {
   }, [token, requiredRole]);
 
   if (isAuthorized === null) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   return isAuthorized ? children : <Navigate to="/login" />;

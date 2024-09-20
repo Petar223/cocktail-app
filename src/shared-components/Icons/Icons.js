@@ -104,3 +104,19 @@ export const IconHeartOutline = ({
     <path d="M12.1 8.64l-.1.1-.1-.1c-1.45-1.43-3.8-1.44-5.25.04-1.56 1.63-1.68 4.22-.1 5.94L12 21.35l5.45-6.63c1.58-1.72 1.46-4.31-.1-5.94-1.45-1.48-3.8-1.47-5.25-.04z" />
   </svg>
 );
+
+export const IconHamburger = ({
+  width = '24',
+  height = '24',
+  fill = 'currentColor',
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={width}
+    height={height}
+    fill={fill}
+  >
+    <path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z" />
+  </svg>
+);

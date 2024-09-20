@@ -19,7 +19,7 @@ const SwitchInput = styled.input`
   opacity: 0;
   width: 0;
   height: 0;
-
+  border: 1px solid ${({ theme }) => theme.grey[900]}
   &:checked + span {
     background-color: ${({ theme }) => theme.primary[500]};
   }

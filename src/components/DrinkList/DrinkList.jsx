@@ -23,6 +23,7 @@ import {
   IconContainer,
 } from '../../shared-components/InfoTooltip/infoTolltip';
 import useUserRole from '../../hooks/useUserRole';
+import { useNotification } from '../../context/NotificationContext';
 
 const Container = styled.div`
   width: 100%;
@@ -42,6 +43,7 @@ function DrinkList() {
   const { type } = useParams();
   const [deleteId, setDeleteId] = useState(null);
   const userRole = useUserRole();
+  const showNotification = useNotification();
 
   const {
     data: drinks,
@@ -57,8 +59,16 @@ function DrinkList() {
     if (!isDeleting && !deleteError && deleteId !== null) {
       setData(prevData => prevData.filter(drink => drink._id !== deleteId));
       setDeleteId(null);
+      showNotification('Drink deleted successfully!', 5000, 'success');
     }
-  }, [isDeleting, deleteError, deleteId, setData]);
+    if (deleteError) {
+      showNotification(
+        'Failed to delete drink. Please try again.',
+        5000,
+        'error'
+      );
+    }
+  }, [isDeleting, deleteError, deleteId, showNotification, setData]);
 
   const filteredDrinks = drinks?.filter(
     drink =>
@@ -120,10 +130,6 @@ function DrinkList() {
           )}
         </ButtonContainer>
       </HeaderContent>
-
-      {isDeleting && <div> Deleting</div>}
-      {deleteError && <div>Error Delete: {deleteError.message}</div>}
-
       <ItemContainer>
         {filteredDrinks.length > 0 ? (
           filteredDrinks?.map(drink => (
@@ -135,7 +141,7 @@ function DrinkList() {
               handleDelete={handleDelete}
               handleEdit={handleEdit}
               handleFavorite={handleFavorite}
-              isDeleting={isDeleting}
+              isDeleting={deleteId === drink._id}
             />
           ))
         ) : (

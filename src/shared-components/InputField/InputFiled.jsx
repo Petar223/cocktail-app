@@ -26,6 +26,7 @@ const InputLabel = styled.label`
   color: ${({ theme }) => theme.grey[500]};
   transition: 0.3s;
   font-size: 14px;
+  z-index: ${({ $isFocusedOrFilled }) => ($isFocusedOrFilled ? '1' : '-1')};
 
   ${({ $isFocusedOrFilled, theme }) =>
     $isFocusedOrFilled &&
@@ -39,8 +40,8 @@ const StyledInput = styled.input`
   width: 100%;
   padding: 15px 20px;
   border: 2px solid
-    ${({ hasError, theme }) =>
-      hasError
+    ${({ $hasError, theme }) =>
+      $hasError
         ? theme.redAccent[500]
         : theme.mode === 'dark'
           ? theme.grey[900]
@@ -51,8 +52,8 @@ const StyledInput = styled.input`
   transition: 0.3s;
 
   &:focus {
-    border-color: ${({ hasError, theme }) =>
-      hasError ? theme.redAccent[500] : theme.grey[100]};
+    border-color: ${({ $hasError, theme }) =>
+      $hasError ? theme.redAccent[500] : theme.grey[100]};
   }
 
   &:focus + ${InputLabel} {
@@ -70,9 +71,10 @@ const InputField = ({
   id,
   label,
   register,
-  hasError,
+  $hasError,
   errors,
   value,
+  placeholder,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -89,16 +91,17 @@ const InputField = ({
     <InputWrapper>
       <StyledInput
         id={id}
-        hasError={hasError}
+        $hasError={$hasError}
         {...register(id, { required: true })}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        placeholder={placeholder}
         {...props}
       />
-      <InputLabel $isFocusedOrFilled={isFocused || value || hasError}>
+      <InputLabel $isFocusedOrFilled={isFocused || value || $hasError}>
         {label}
       </InputLabel>
-      {hasError && (
+      {$hasError && (
         <ErrorMessage>
           {errors[id]?.message || 'This field is required'}
         </ErrorMessage>

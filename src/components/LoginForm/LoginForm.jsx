@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import axiosInstance from '../../api/rest/axios';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from '../../shared-components/CustomButton/CustomButton';
 import InputField from '../../shared-components/InputField/InputFiled';
 import CenteredContainer from '../../shared-components/CenteredContainer/CenteradContainer';
 import FormContainer from '../../shared-components/FormContainer/FormContainer';
-import { jwtDecode } from 'jwt-decode';
 import { useNotification } from '../../context/NotificationContext';
+import loginUser from '../../api/rest/auth/login';
 
 const LoginForm = () => {
   const {
@@ -25,16 +24,24 @@ const LoginForm = () => {
   const onSubmit = async data => {
     setIsLoading(true);
     try {
-      const response = await axiosInstance.post('/auth/login', data);
-      if (!response || !response.data || !response.data.token) {
+      const response = await loginUser(data);
+
+      if (!response || !response.token) {
         throw new Error('Invalid response from server');
       }
-      const { token } = response.data;
-      localStorage.setItem('token', token);
 
+      const { token } = response;
+      localStorage.setItem('token', token);
       navigate('/');
     } catch (error) {
-      showNotification('Unexpected error occurred.', 5000, 'error');
+      if (
+        error.status === 401 &&
+        error.message === 'Invalid username or password'
+      ) {
+        showNotification('Invalid username or password', 5000, 'error');
+      } else {
+        showNotification('An error occurred during login', 5000, 'error');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -46,8 +53,9 @@ const LoginForm = () => {
         <InputField
           id="username"
           label="Username"
+          placeholder="Username"
           register={register}
-          hasError={errors.username}
+          $hasError={errors.username}
           errors={errors}
           value={usernameValue}
         />
@@ -56,8 +64,9 @@ const LoginForm = () => {
           id="password"
           type="password"
           label="Password"
+          placeholder="Password"
           register={register}
-          hasError={errors.password}
+          $hasError={errors.password}
           errors={errors}
           value={passwordValue}
         />

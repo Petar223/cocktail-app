@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import HeaderContainer from './components/HeaderContainer/HeaderContainer';
 import Nav from './components/Nav/Nav';
 import NavContainer from './components/NavContainer/NavContainer';
 import LinkContainer from '../../shared-components/styledComponents/LinkContainer/LinkContainer';
 import NavLink from './components/NavLink/NavLink';
 import ThemeSwitch from '../ThemeSwich/ThemeSwitch';
+import Dropdown from '../../shared-components/Dropdown/Dropdown';
+import Logout from '../Logout/Logout';
+import ThemeDropdownContainer from './components/ThemeDropdownContainer/ThemeDropdownContainer';
 
 function Header() {
   return (
@@ -17,7 +20,12 @@ function Header() {
             <NavLink to="/favorites">Favorites</NavLink>
             <NavLink to="/about">About</NavLink>
           </LinkContainer>
-          <ThemeSwitch />
+          <ThemeDropdownContainer>
+            <ThemeSwitch />
+            <Dropdown>
+              <Logout />
+            </Dropdown>
+          </ThemeDropdownContainer>
         </NavContainer>
       </Nav>
     </HeaderContainer>

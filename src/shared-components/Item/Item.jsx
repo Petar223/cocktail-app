@@ -70,36 +70,45 @@ const Item = ({
     img.onerror = handleError;
   }, [imageUrl]);
 
-  if (loading) {
-    return null;
-  }
-
   const content = (
     <ItemContainer>
-      <ItemImage
-        src={imgError ? placeholderImage : imageUrl}
-        alt={drinkType.name}
-        onError={handleError}
-      />
-      {userRole === 'admin' && (
-        <DeleteButton
-          onClick={event => handleDeleteClick(event, drinkType._id)}
-        >
-          {isDeleting ? <Spinner /> : 'Delete'}
-        </DeleteButton>
-      )}
-      {(userRole === 'admin' || userRole === 'general') && (
-        <EditButton onClick={event => handleEditClick(event, drinkType._id)}>
-          Edit
-        </EditButton>
-      )}
+      {/* If loading, show the spinner, otherwise show the image and the rest of the content */}
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <ItemImage
+            src={imgError ? placeholderImage : imageUrl}
+            alt={drinkType.name}
+            onError={handleError}
+            onLoad={handleLoad}
+          />
 
-      <NameWrapper>
-        <ItemName>{drinkType.name}</ItemName>
-        <FavoriteButton
-          onClick={event => handleFavoriteClick(event, drinkType._id)}
-        />
-      </NameWrapper>
+          {/* Buttons and other elements */}
+          {userRole === 'admin' && (
+            <DeleteButton
+              onClick={event => handleDeleteClick(event, drinkType._id)}
+            >
+              {isDeleting ? <Spinner /> : 'Delete'}
+            </DeleteButton>
+          )}
+
+          {(userRole === 'admin' || userRole === 'general') && (
+            <EditButton
+              onClick={event => handleEditClick(event, drinkType._id)}
+            >
+              Edit
+            </EditButton>
+          )}
+
+          <NameWrapper>
+            <ItemName>{drinkType.name}</ItemName>
+            <FavoriteButton
+              onClick={event => handleFavoriteClick(event, drinkType._id)}
+            />
+          </NameWrapper>
+        </>
+      )}
     </ItemContainer>
   );
 

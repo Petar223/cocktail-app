@@ -5,6 +5,7 @@ import { useMode, ColorModeContext } from './theme';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './GlobalStyle/GlobalStyle';
 import { NotificationProvider } from './context/NotificationContext';
+import ErrorHandler from './components/ErrorHandler/ErrorHandler';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -15,7 +16,9 @@ function App() {
         <ThemeProvider theme={theme}>
           <NotificationProvider>
             <GlobalStyle />
-            <Root />
+            <ErrorHandler>
+              <Root />
+            </ErrorHandler>
           </NotificationProvider>
         </ThemeProvider>
       </ColorModeContext.Provider>

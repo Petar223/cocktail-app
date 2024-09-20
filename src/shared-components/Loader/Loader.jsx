@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
 const Loader = styled.div`
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  border-top: 4px solid #fff;
+  border: ${({ size }) => size / 7 || 2}px solid rgba(255, 255, 255, 0.3);
+  border-top: ${({ size }) => size / 7 || 2}px solid white;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: ${({ size }) => size || 14}px;
+  height: ${({ size }) => size || 14}px;
   animation: spin 1s linear infinite;
-  margin-right: 10px;
 
   @keyframes spin {
     0% {

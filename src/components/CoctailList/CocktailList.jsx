@@ -18,6 +18,7 @@ import { ButtonContainer } from '../../shared-components/ButtonContainer/ButtonC
 import Loading from '../../shared-components/Loading/Loading';
 import styled from 'styled-components';
 import useUserRole from '../../hooks/useUserRole';
+import { useNotification } from '../../context/NotificationContext';
 
 const Container = styled.div`
   width: 100%;
@@ -27,6 +28,7 @@ function CocktailList() {
   const { drinkId, type } = useParams();
   const [deleteId, setDeleteId] = useState(null);
   const userRole = useUserRole();
+  const showNotification = useNotification();
   const isAlcoholic = type === 'alcoholic';
 
   const {
@@ -59,8 +61,16 @@ function CocktailList() {
     if (!isDeleting && !deleteError && deleteId !== null) {
       setData(prevData => prevData.filter(drink => drink._id !== deleteId));
       setDeleteId(null);
+      showNotification('Drink deleted successfully!', 5000, 'success');
     }
-  }, [isDeleting, deleteError, deleteId, setData]);
+    if (deleteError) {
+      showNotification(
+        'Failed to delete drink. Please try again.',
+        5000,
+        'error'
+      );
+    }
+  }, [isDeleting, deleteError, deleteId, showNotification, setData]);
 
   const handleClick = cocktailId => {
     runFetchCocktailById(cocktailId);
@@ -137,29 +147,23 @@ function CocktailList() {
               handleDelete={handleDelete}
               handleEdit={handleEdit}
               handleFavorite={handleFavorite}
+              isDeleting={deleteId === cocktail._id}
             />
           ))
         ) : (
           <NoItemsFound message="No cocktails found with this ingredient." />
         )}
       </ItemContainer>
-
-      {isDeleting && <div> Deleting</div>}
-      {deleteError && <div>Error Delete: {deleteError.message}</div>}
-
-      {loadingCocktail && <div>Loading cocktail details...</div>}
-      {cocktailError && (
-        <div>Error fetching cocktail details: {cocktailError.message}</div>
-      )}
-      {cocktail && (
+      {cocktail || loadingCocktail ? (
         <ModalBackground>
           <CocktailModal
             cocktail={cocktail}
             drinks={drinks}
             onClose={handleClose}
+            isLoading={loadingCocktail}
           />
         </ModalBackground>
-      )}
+      ) : null}
     </Container>
   );
 }
