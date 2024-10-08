@@ -8,23 +8,30 @@ import ThemeSwitch from '../ThemeSwich/ThemeSwitch';
 import Dropdown from '../../shared-components/Dropdown/Dropdown';
 import Logout from '../Logout/Logout';
 import ThemeDropdownContainer from './components/ThemeDropdownContainer/ThemeDropdownContainer';
+import { useAuth } from '../../context/AuthContext';
 
 function Header() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <HeaderContainer>
       <Nav>
         <NavContainer>
-          <LinkContainer>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/browse">Browse Cocktails</NavLink>
-            <NavLink to="/favorites">Favorites</NavLink>
-            <NavLink to="/about">About</NavLink>
-          </LinkContainer>
+          {isAuthenticated && (
+            <LinkContainer>
+              <NavLink to="/">Home</NavLink>
+              <NavLink to="/browse">Browse Cocktails</NavLink>
+              <NavLink to="/favorites">Favorites</NavLink>
+              <NavLink to="/about">About</NavLink>
+            </LinkContainer>
+          )}
           <ThemeDropdownContainer>
             <ThemeSwitch />
-            <Dropdown>
-              <Logout />
-            </Dropdown>
+            {isAuthenticated && (
+              <Dropdown>
+                <Logout />
+              </Dropdown>
+            )}
           </ThemeDropdownContainer>
         </NavContainer>
       </Nav>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logoutUser from '../../api/rest/auth/logout';
 import styled, { keyframes } from 'styled-components';
+import { useAuth } from '../../context/AuthContext';
 
 // Animacija za loader (rotacija)
 const rotate = keyframes`
@@ -56,12 +57,14 @@ const Loader = styled.div`
 const Logout = () => {
   const [isLoading, setIsLoading] = useState(false); // Praćenje stanja učitavanja
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const handleLogout = async () => {
     setIsLoading(true); // Postavi stanje učitavanja na true
     try {
       await logoutUser();
       localStorage.removeItem('token');
+      logout();
       navigate('/login');
     } catch (error) {
       console.error('Error during logout:', error);

@@ -7,6 +7,7 @@ import CenteredContainer from '../../shared-components/CenteredContainer/Centera
 import FormContainer from '../../shared-components/FormContainer/FormContainer';
 import { useNotification } from '../../context/NotificationContext';
 import loginUser from '../../api/rest/auth/login';
+import { useAuth } from '../../context/AuthContext';
 
 const LoginForm = () => {
   const {
@@ -18,6 +19,7 @@ const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const showNotification = useNotification();
+  const { login } = useAuth();
   const usernameValue = watch('username');
   const passwordValue = watch('password');
 
@@ -33,6 +35,7 @@ const LoginForm = () => {
       const { token } = response;
       localStorage.setItem('token', token);
       navigate('/');
+      login(token);
     } catch (error) {
       if (
         error.status === 401 &&
@@ -59,7 +62,6 @@ const LoginForm = () => {
           errors={errors}
           value={usernameValue}
         />
-
         <InputField
           id="password"
           type="password"
@@ -70,7 +72,6 @@ const LoginForm = () => {
           errors={errors}
           value={passwordValue}
         />
-
         <CustomButton onClick={handleSubmit(onSubmit)} isLoading={isLoading}>
           Login
         </CustomButton>
