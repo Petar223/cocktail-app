@@ -1,4 +1,3 @@
-import React from 'react';
 import React, { useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 
@@ -46,8 +45,8 @@ const StyledInput = styled(({ $hasError, ...props }) => <input {...props} />)`
     $hasError
       ? theme.redAccent[500]
       : theme.mode === 'dark'
-      ? theme.grey[900]
-      : theme.grey[100]};
+        ? theme.grey[900]
+        : theme.grey[100]};
   border-radius: 5px;
   font-size: 16px;
   outline: none;
@@ -64,7 +63,6 @@ const StyledInput = styled(({ $hasError, ...props }) => <input {...props} />)`
     color: ${({ theme }) => theme.grey[100]};
   }
 `;
-
 
 const ErrorMessage = styled.span`
   color: ${({ theme }) => theme.redAccent[500]};

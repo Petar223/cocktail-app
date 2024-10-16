@@ -6,18 +6,18 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const { type } = require('os');
 
 module.exports = {
-  entry: './src/index.js', // Ulazna tačka aplikacije
+  entry: './src/index.js',
   output: {
-    filename: 'bundle.[contenthash].js', // Ime izlaznog fajla sa hash-om za keširanje
-    path: path.resolve(__dirname, 'build'), // Gde se smeštaju izlazni fajlovi
-    publicPath: '/', // Javni put za učitavanje fajlova
-    clean: true, // Automatsko čišćenje stare build fascikle
+    filename: 'bundle.[contenthash].js',
+    path: path.resolve(__dirname, 'build'),
+    publicPath: '/',
+    clean: true,
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/, // Primeni Babel na .js fajlove
-        exclude: /node_modules/, // Izuzmi node_modules
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -26,32 +26,32 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/, // CSS loader za rad sa stilovima
+        test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg)$/i, // Regex koji hvata sve formate slika
-        type: 'asset/resource', // Webpack će tretirati fajlove kao resurse (kopira ih u output folder)
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,
+        type: 'asset/resource',
         generator: {
-          filename: 'images/[name][hash][ext]', // Ime fajlova u izlaznoj fascikli
+          filename: 'images/[name][hash][ext]',
         },
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html', // HTML šablon
-      favicon: './public/favicon.ico', // Favicon
+      template: './public/index.html',
+      favicon: './public/favicon.ico',
     }),
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].[contenthash].css', // Imena CSS fajlova sa hash-om
+      filename: 'styles/[name].[contenthash].css',
     }),
-    new CleanWebpackPlugin(), // Plugin za čišćenje build foldera pre novog build-a
+    new CleanWebpackPlugin(),
     new ESLintPlugin({
-      extensions: ['js', 'jsx'], // Lint-ovanje JavaScript i JSX fajlova
+      extensions: ['js', 'jsx'],
     }),
   ],
   resolve: {
-    extensions: ['.js', '.jsx'], // Automatsko prepoznavanje ekstenzija
+    extensions: ['.js', '.jsx'],
   },
 };

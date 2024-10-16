@@ -5,15 +5,13 @@ const common = require('../webpack.common');
 
 module.exports = merge(common, {
   mode: 'development',
-  devtool: 'eval-source-map', // Omogućava source maps za debugging
+  devtool: 'eval-source-map',
   devServer: {
-    static: path.resolve(__dirname, '../public'), // Gde se nalaze statički fajlovi
-    historyApiFallback: true, // Za podršku za React Router
-    hot: true, // Hot module replacement za brže osvežavanje koda
-    port: 3000, // Port na kojem će dev server raditi
-    open: true, // Automatsko otvaranje preglednika
+    static: path.resolve(__dirname, '../public'),
+    historyApiFallback: true,
+    hot: true,
+    port: 3000,
+    open: true,
   },
-  plugins: [
-    new ReactRefreshWebpackPlugin(), // Plugin za brže osvežavanje React komponenti
-  ],
+  plugins: [new ReactRefreshWebpackPlugin()],
 });
