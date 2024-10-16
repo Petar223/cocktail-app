@@ -4,13 +4,11 @@ const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
-// Kreiramo provider za autentifikaciju koji omotava celu aplikaciju
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Simulacija provere da li je korisnik ulogovan (možeš zameniti pravom logikom)
   useEffect(() => {
-    const token = localStorage.getItem('token'); // Proverava postojanje tokena u localStorage
+    const token = localStorage.getItem('token');
     if (token) {
       setIsAuthenticated(true);
     }

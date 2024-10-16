@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import HeaderContainer from './components/HeaderContainer/HeaderContainer';
 import Nav from './components/Nav/Nav';
 import NavContainer from './components/NavContainer/NavContainer';

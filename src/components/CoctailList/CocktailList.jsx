@@ -46,12 +46,7 @@ function CocktailList() {
 
   const [
     runFetchCocktailById,
-    {
-      data: cocktail,
-      loading: loadingCocktail,
-      error: cocktailError,
-      resetData,
-    },
+    { data: cocktail, loading: loadingCocktail, resetData },
   ] = useLazyFetch(getCocktailById);
 
   const [runDeleteCocktail, { loading: isDeleting, error: deleteError }] =

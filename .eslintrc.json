@@ -22,11 +22,18 @@
     "sourceType": "module"
   },
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "parser": "flow"
+      }
+    ],
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "import/no-unresolved": "off",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "import/no-named-as-default": "off"
   },
   "settings": {
     "react": {
