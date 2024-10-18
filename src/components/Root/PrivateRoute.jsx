@@ -9,6 +9,10 @@ const PrivateRoute = ({ children, requiredRole }) => {
 
   useEffect(() => {
     const verifyToken = async () => {
+      if (!token) {
+        setIsAuthorized(false);
+        return;
+      }
       if (token) {
         try {
           const response = await axiosInstance.get('/auth/verifyToken');
@@ -23,8 +27,6 @@ const PrivateRoute = ({ children, requiredRole }) => {
           console.error('Token verification failed:', error);
           setIsAuthorized(false);
         }
-      } else {
-        setIsAuthorized(false);
       }
     };
 
@@ -32,11 +34,7 @@ const PrivateRoute = ({ children, requiredRole }) => {
   }, [token, requiredRole]);
 
   if (isAuthorized === null) {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+    return <Loading />;
   }
 
   return isAuthorized ? children : <Navigate to="/login" />;

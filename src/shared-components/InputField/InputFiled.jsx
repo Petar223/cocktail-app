@@ -36,23 +36,20 @@ const InputLabel = styled.label`
     `}
 `;
 
-const StyledInput = styled(({ $hasError, ...props }) => <input {...props} />)`
+const StyledInput = styled.input`
   width: 100%;
   padding: 15px 20px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: ${({ $hasError, theme }) =>
-    $hasError
-      ? theme.redAccent[500]
-      : theme.mode === 'dark'
-        ? theme.grey[900]
-        : theme.grey[100]};
+  border: 2px solid
+    ${({ $hasError, theme }) =>
+      $hasError
+        ? theme.redAccent[500]
+        : theme.mode === 'dark'
+          ? theme.grey[900]
+          : theme.grey[100]};
   border-radius: 5px;
   font-size: 16px;
   outline: none;
   transition: 0.3s;
-  margin: auto;
-  display: block;
 
   &:focus {
     border-color: ${({ $hasError, theme }) =>
