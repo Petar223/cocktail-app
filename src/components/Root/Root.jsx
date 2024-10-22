@@ -5,15 +5,15 @@ import Loading from '../../shared-components/Loading/Loading';
 import PrivateRoute from './PrivateRoute';
 import LoginForm from '../LoginForm/LoginForm';
 
-export const DrinkList = React.lazy(() => import('../DrinkList/DrinkList'));
+const DrinkList = React.lazy(() => import('../DrinkList/DrinkList'));
 
-export const CocktailList = React.lazy(
-  () => import('../CoctailList/CocktailList')
-);
+const CocktailList = React.lazy(() => import('../CoctailList/CocktailList'));
 
-export const Home = React.lazy(() => import('../Home/Home'));
+const Home = React.lazy(() => import('../Home/Home'));
 
-export const TypeSelection = React.lazy(
+const RegisterForm = React.lazy(() => import('../RegisterForm/RegisterForm'));
+
+const TypeSelection = React.lazy(
   () => import('../TypeSelection/TypeSelection')
 );
 
@@ -24,6 +24,7 @@ function Root() {
         <Layout>
           <Routes>
             <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegisterForm />} />
             <Route
               path="/"
               element={

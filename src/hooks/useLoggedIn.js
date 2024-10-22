@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axiosInstance from '../api/rest/axios';
 
 const useIsLoggedIn = requiredRole => {
-  const [isLoggedIn, setIsLoggedIn] = useState(null); // null za inicijalno stanje (loading)
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const useIsLoggedIn = requiredRole => {
     verifyToken();
   }, [token, requiredRole]);
 
-  return isLoggedIn; // Vraća true, false, ili null (ako još proverava)
+  return isLoggedIn;
 };
 
 export default useIsLoggedIn;

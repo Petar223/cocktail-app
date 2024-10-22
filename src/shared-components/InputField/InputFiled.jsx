@@ -75,6 +75,7 @@ const InputField = ({
   errors,
   value,
   placeholder,
+  validationRules,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -92,7 +93,7 @@ const InputField = ({
       <StyledInput
         id={id}
         $hasError={$hasError}
-        {...register(id, { required: true })}
+        {...register(id, validationRules)}
         onFocus={handleFocus}
         onBlur={handleBlur}
         placeholder={placeholder}

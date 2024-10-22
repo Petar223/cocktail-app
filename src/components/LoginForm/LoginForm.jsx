@@ -8,6 +8,13 @@ import FormContainer from '../../shared-components/FormContainer/FormContainer';
 import { useNotification } from '../../context/NotificationContext';
 import loginUser from '../../api/rest/auth/login';
 import { useAuth } from '../../context/AuthContext';
+import styled from 'styled-components';
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: inherit;
+`;
 
 const LoginForm = () => {
   const {
@@ -72,9 +79,12 @@ const LoginForm = () => {
           errors={errors}
           value={passwordValue}
         />
-        <CustomButton onClick={handleSubmit(onSubmit)} isLoading={isLoading}>
-          Login
-        </CustomButton>
+        <ButtonWrapper>
+          <CustomButton onClick={handleSubmit(onSubmit)} isLoading={isLoading}>
+            Login
+          </CustomButton>
+          <CustomButton to={'/register'}>Sign Up</CustomButton>
+        </ButtonWrapper>
       </FormContainer>
     </CenteredContainer>
   );
