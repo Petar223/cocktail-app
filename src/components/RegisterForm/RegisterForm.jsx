@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import CustomButton from '../../shared-components/CustomButton/CustomButton';
@@ -7,7 +7,7 @@ import CenteredContainer from '../../shared-components/CenteredContainer/Centera
 import FormContainer from '../../shared-components/FormContainer/FormContainer';
 import { useNotification } from '../../context/NotificationContext';
 import styled from 'styled-components';
-// import registerUser from '../../api/rest/auth/register';
+import registerUser from '../../api/rest/auth/registerUser';
 
 const MemberLoginPrompt = styled.div`
   margin-top: 20px;
@@ -30,30 +30,38 @@ const RegisterForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    getValues,
     formState: { errors },
   } = useForm();
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  const [registerResponse, setRegisterResponse] = useState(null);
   const showNotification = useNotification();
-  const password = watch('password');
-  const confirmPassword = watch('confirmPassword');
-  const email = watch('email');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (registerResponse) {
+      navigate('/login');
+    }
+  }, [registerResponse, navigate]);
 
   const onSubmit = async data => {
-    // setIsLoading(true);
-    // try {
-    //   const response = await registerUser(data);
-    //   if (!response || !response.token) {
-    //     throw new Error('Invalid response from server');
-    //   }
-    //   showNotification('Registration successful!', 5000, 'success');
-    //   navigate('/login');
-    // } catch (error) {
-    //   showNotification('An error occurred during registration', 5000, 'error');
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    setIsLoading(true);
+    try {
+      const response = await registerUser(data);
+      console.log('Backend response:', response);
+      const message = response.data ? response.data.message : response.message;
+
+      if (!message) {
+        throw new Error('Invalid response from server');
+      }
+      showNotification('Registration successful!', 5000, 'success');
+      setRegisterResponse(response);
+    } catch (error) {
+      console.error('Caught error:', error);
+      showNotification('An error occurred during registration', 5000, 'error');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -67,7 +75,6 @@ const RegisterForm = () => {
           validationRules={{ required: 'Username is required' }}
           $hasError={errors.username}
           errors={errors}
-          value={watch('username')}
         />
         <InputField
           id="email"
@@ -84,7 +91,6 @@ const RegisterForm = () => {
           }}
           $hasError={errors.email}
           errors={errors}
-          value={email}
         />
         <InputField
           id="password"
@@ -92,10 +98,15 @@ const RegisterForm = () => {
           label="Password"
           placeholder="Password"
           register={register}
-          validationRules={{ required: 'Password is required' }}
+          validationRules={{
+            required: 'Password is required',
+            minLength: {
+              value: 8,
+              message: 'Password must be at least 8 characters',
+            },
+          }}
           $hasError={errors.password}
           errors={errors}
-          value={password}
         />
         <InputField
           id="confirmPassword"
@@ -105,11 +116,15 @@ const RegisterForm = () => {
           register={register}
           validationRules={{
             required: 'Please confirm your password',
-            validate: value => value === password || 'Passwords do not match',
+            minLength: {
+              value: 8,
+              message: 'Password must be at least 8 characters',
+            },
+            validate: value =>
+              value === getValues('password') || 'Passwords do not match',
           }}
           $hasError={errors.confirmPassword}
           errors={errors}
-          value={confirmPassword}
         />
         <CustomButton onClick={handleSubmit(onSubmit)} isLoading={isLoading}>
           Register
