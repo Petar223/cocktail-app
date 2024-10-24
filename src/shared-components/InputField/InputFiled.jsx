@@ -73,7 +73,6 @@ const InputField = ({
   register,
   $hasError,
   errors,
-  value,
   placeholder,
   validationRules,
   ...props
@@ -84,8 +83,8 @@ const InputField = ({
     setIsFocused(true);
   };
 
-  const handleBlur = () => {
-    setIsFocused(false);
+  const handleBlur = e => {
+    setIsFocused(!!e.target.value);
   };
 
   return (
@@ -99,7 +98,7 @@ const InputField = ({
         placeholder={placeholder}
         {...props}
       />
-      <InputLabel $isFocusedOrFilled={isFocused || value || $hasError}>
+      <InputLabel $isFocusedOrFilled={isFocused || $hasError}>
         {label}
       </InputLabel>
       {$hasError && (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from '../../shared-components/CustomButton/CustomButton';
@@ -21,14 +21,21 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const [loginResponse, setLoginResponse] = useState(null);
   const navigate = useNavigate();
   const showNotification = useNotification();
   const { login } = useAuth();
-  const usernameValue = watch('username');
-  const passwordValue = watch('password');
+
+  useEffect(() => {
+    if (loginResponse && loginResponse.token) {
+      const { token } = loginResponse;
+      localStorage.setItem('token', token);
+      login(token);
+      navigate('/');
+    }
+  }, [loginResponse, login, navigate]);
 
   const onSubmit = async data => {
     setIsLoading(true);
@@ -39,10 +46,7 @@ const LoginForm = () => {
         throw new Error('Invalid response from server');
       }
 
-      const { token } = response;
-      localStorage.setItem('token', token);
-      navigate('/');
-      login(token);
+      setLoginResponse(response);
     } catch (error) {
       if (
         error.status === 401 &&
@@ -67,7 +71,7 @@ const LoginForm = () => {
           register={register}
           $hasError={errors.username}
           errors={errors}
-          value={usernameValue}
+          validationRules={{ required: 'Username is required' }}
         />
         <InputField
           id="password"
@@ -75,9 +79,15 @@ const LoginForm = () => {
           label="Password"
           placeholder="Password"
           register={register}
+          validationRules={{
+            required: 'Password is required',
+            minLength: {
+              value: 6,
+              message: 'Password must be at least 6 characters',
+            },
+          }}
           $hasError={errors.password}
           errors={errors}
-          value={passwordValue}
         />
         <ButtonWrapper>
           <CustomButton onClick={handleSubmit(onSubmit)} isLoading={isLoading}>
