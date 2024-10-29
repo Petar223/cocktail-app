@@ -8,36 +8,32 @@ import HeaderContent from '../Header/components/HeaderContent/HeaderContent';
 import ItemContainer from '../../shared-components/styledComponents/ItemContainer/ItemContainer';
 import ModalBackground from '../../modals/components/ModalBackground/ModalBackground';
 import getDrinks from '../../api/rest/drinks/getDrinks';
-import getCocktails from '../../api/rest/drinks/getCoctails';
+import getFavorites from '../../api/rest/drinks/getFavoritesCocktails';
 import getCocktailById from '../../api/rest/drinks/getCocktailById';
 import deleteCocktail from '../../api/rest/drinks/deleteCocktail';
 import useFetch from '../../hooks/useFetch';
 import useLazyFetch from '../../hooks/useLazyFetch';
-import { IconAdd, IconBack } from '../../shared-components/Icons/Icons';
+import { IconBack } from '../../shared-components/Icons/Icons';
 import { ButtonContainer } from '../../shared-components/ButtonContainer/ButtonContainer';
 import Loading from '../../shared-components/Loading/Loading';
 import styled from 'styled-components';
-import useUserRole from '../../hooks/useUserRole';
 import { useNotification } from '../../context/NotificationContext';
-import addFavoriteCocktail from '../../api/rest/drinks/addFavoriteCocktail';
 
 const Container = styled.div`
   width: 100%;
 `;
 
-function CocktailList() {
-  const { drinkId, type } = useParams();
+function FavoriteList() {
+  const { drinkId } = useParams();
   const [deleteId, setDeleteId] = useState(null);
-  const userRole = useUserRole();
   const showNotification = useNotification();
-  const isAlcoholic = type === 'alcoholic';
 
   const {
-    data: cocktails,
-    loading: loadingCocktails,
-    error: cocktailsError,
+    data: favorites,
+    loading: loadingfavorites,
+    error: favoritesError,
     setData,
-  } = useFetch(getCocktails);
+  } = useFetch(getFavorites);
 
   const {
     data: drinks,
@@ -52,11 +48,6 @@ function CocktailList() {
 
   const [runDeleteCocktail, { loading: isDeleting, error: deleteError }] =
     useLazyFetch(deleteCocktail);
-
-  const [
-    runAddFavorite,
-    { loading: isAddingFavorite, error: addFavoriteError },
-  ] = useLazyFetch(addFavoriteCocktail);
 
   useEffect(() => {
     if (!isDeleting && !deleteError && deleteId !== null) {
@@ -91,26 +82,18 @@ function CocktailList() {
   };
 
   const handleFavorite = id => {
-    runAddFavorite(id);
+    console.log(`Favorite clicked for drink with id: ${id}`);
   };
 
-  const filteredCocktails = !type
-    ? cocktails
-    : cocktails?.filter(
-        cocktail =>
-          cocktail.alcoholic === isAlcoholic &&
-          cocktail.ingredients.some(ingredient => {
-            return ingredient._id === drinkId;
-          })
-      );
+  const filteredCocktails = favorites?.cocktails || [];
 
-  if (loadingCocktails || loadingDrinks)
+  if (loadingfavorites || loadingDrinks)
     return (
       <div>
         <Loading />
       </div>
     );
-  if (cocktailsError || drinksError)
+  if (favoritesError || drinksError)
     return (
       <NoItemsFound message="Something went wrong please try again later." />
     );
@@ -119,20 +102,14 @@ function CocktailList() {
     <Container>
       <HeaderContent>
         <div>
-          <h3>Cocktails</h3>
+          <h3>Fovorite Cocktails</h3>
         </div>
         <div>
           <ButtonContainer>
-            <CustomButton to={!type ? `/browse` : `/type/${type}`}>
+            <CustomButton to={'/'}>
               <IconBack width={32} height={32} fill="currentColor" />{' '}
-              {!type ? 'Back ot Type' : 'Back to Drinks'}
+              {'Back ot Home'}
             </CustomButton>
-            {(userRole === 'admin' || userRole === 'general') && (
-              <CustomButton>
-                <IconAdd width={32} height={32} fill="currentColor" />
-                Add New Coctail{' '}
-              </CustomButton>
-            )}
           </ButtonContainer>
         </div>
       </HeaderContent>
@@ -149,11 +126,10 @@ function CocktailList() {
               handleEdit={handleEdit}
               handleFavorite={handleFavorite}
               isDeleting={deleteId === cocktail._id}
-              isAddingFavorite={isAddingFavorite}
             />
           ))
         ) : (
-          <NoItemsFound message="No cocktails found with this ingredient." />
+          <NoItemsFound message="No favorite cocktails found. Explore and add your favorites!" />
         )}
       </ItemContainer>
       {cocktail || loadingCocktail ? (
@@ -170,4 +146,4 @@ function CocktailList() {
   );
 }
 
-export default CocktailList;
+export default FavoriteList;

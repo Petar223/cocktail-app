@@ -4,7 +4,6 @@ import logoutUser from '../../api/rest/auth/logout';
 import styled, { keyframes } from 'styled-components';
 import { useAuth } from '../../context/AuthContext';
 
-// Animacija za loader (rotacija)
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
@@ -14,7 +13,6 @@ const rotate = keyframes`
   }
 `;
 
-// Stilizovano dugme sa hover i klik efektima
 const LogoutButton = styled.button`
   padding: 10px 20px;
   font-size: 16px;
@@ -43,7 +41,6 @@ const LogoutButton = styled.button`
   }
 `;
 
-// Loader stilizovan kao kružni spinner
 const Loader = styled.div`
   border: 4px solid ${({ theme }) => theme.background};
   border-top: 4px solid ${({ theme }) => theme.text};
@@ -55,12 +52,12 @@ const Loader = styled.div`
 `;
 
 const Logout = () => {
-  const [isLoading, setIsLoading] = useState(false); // Praćenje stanja učitavanja
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { logout } = useAuth();
 
   const handleLogout = async () => {
-    setIsLoading(true); // Postavi stanje učitavanja na true
+    setIsLoading(true);
     try {
       await logoutUser();
       localStorage.removeItem('token');
@@ -69,7 +66,7 @@ const Logout = () => {
     } catch (error) {
       console.error('Error during logout:', error);
     } finally {
-      setIsLoading(false); // Kada završi, vrati stanje učitavanja na false
+      setIsLoading(false);
     }
   };
 

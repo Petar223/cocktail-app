@@ -19,6 +19,7 @@ const HomeTagline = styled.div`
   box-shadow: 0 4px 30px ${({ theme }) => theme.blackOverlay};
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
+  border: 2px solid ${({ theme }) => theme.grey[100]};
 `;
 
 export default HomeTagline;

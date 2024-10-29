@@ -12,7 +12,7 @@ export const sharedTaglineStyles = css`
   text-align: left;
   line-height: 1.2;
   margin: 8px;
-  background: ${({ theme }) => theme.grey[700]};
+  background: ${({ theme }) => theme.grey[600]};
   color: ${({ theme }) => theme.grey[100]};
   padding: 24px;
   border-radius: 16px;
@@ -21,7 +21,7 @@ export const sharedTaglineStyles = css`
   -webkit-backdrop-filter: blur(3px);
   cursor: pointer;
   text-decoration: none;
-  border: 1px solid ${({ theme }) => theme.grey[100]};
+  border: 2px solid ${({ theme }) => theme.grey[100]};
   transition:
     border-radius 1s ease,
     transform 0.3s ease;

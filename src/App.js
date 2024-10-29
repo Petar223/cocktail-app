@@ -5,7 +5,7 @@ import { useMode, ColorModeContext } from './theme';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './GlobalStyle/GlobalStyle';
 import { NotificationProvider } from './context/NotificationContext';
-import ErrorHandler from './components/ErrorHandler/ErrorHandler';
+import ErrorHandler from './interceptors/ErrorHandler/ErrorHandler';
 
 function App() {
   const [theme, colorMode] = useMode();

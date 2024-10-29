@@ -29,6 +29,7 @@ const Item = ({
   handleEdit,
   isDeleting,
   handleFavorite,
+  isAddingFavorite,
 }) => {
   const [imgError, setImgError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -72,7 +73,6 @@ const Item = ({
 
   const content = (
     <ItemContainer>
-      {/* If loading, show the spinner, otherwise show the image and the rest of the content */}
       {loading ? (
         <Spinner />
       ) : (
@@ -103,9 +103,14 @@ const Item = ({
 
           <NameWrapper>
             <ItemName>{drinkType.name}</ItemName>
-            <FavoriteButton
-              onClick={event => handleFavoriteClick(event, drinkType._id)}
-            />
+
+            {isAddingFavorite ? (
+              <Spinner />
+            ) : (
+              <FavoriteButton
+                onClick={event => handleFavoriteClick(event, drinkType._id)}
+              />
+            )}
           </NameWrapper>
         </>
       )}

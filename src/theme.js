@@ -83,6 +83,7 @@ const tokens = mode => ({
         blackOverlay: 'rgba(10, 10, 10, 0.5)',
         background: '#888',
         redAccentSharp: '#d32f2f',
+        backgroundImage: '/images/background_dark_5.jpg',
       }
     : {
         grey: {
@@ -165,6 +166,7 @@ const tokens = mode => ({
         blackOverlay: 'rgba(10, 10, 10, 0.5)',
         background: ' #eee',
         redAccentSharp: '#d32f2f',
+        backgroundImage: '/images/background_light_1.jpeg',
       }),
 });
 
@@ -173,7 +175,7 @@ export const ColorModeContext = createContext({
 });
 
 export const useMode = () => {
-  const [mode, setMode] = useState('dark');
+  const [mode, setMode] = useState('light');
 
   const colorMode = useMemo(
     () => ({

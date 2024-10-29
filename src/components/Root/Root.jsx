@@ -4,6 +4,7 @@ import Layout from '../Layout/Layout';
 import Loading from '../../shared-components/Loading/Loading';
 import PrivateRoute from './PrivateRoute';
 import LoginForm from '../LoginForm/LoginForm';
+import FavoriteList from '../FavoriteList/FavoriteList';
 
 const DrinkList = React.lazy(() => import('../DrinkList/DrinkList'));
 
@@ -62,6 +63,14 @@ function Root() {
               element={
                 <PrivateRoute>
                   <TypeSelection />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/favorites"
+              element={
+                <PrivateRoute>
+                  <FavoriteList />
                 </PrivateRoute>
               }
             />
