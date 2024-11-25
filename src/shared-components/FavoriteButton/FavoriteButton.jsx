@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { IconHeartOutline } from '../Icons/Icons';
+import IconHeartOutline from '../../shared-components/Icons/IconHeartOutline';
 
 const bounce = keyframes`
   0% {

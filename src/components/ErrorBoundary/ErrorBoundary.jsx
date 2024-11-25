@@ -1,7 +1,7 @@
 import React from 'react';
 import ErrorBoundaryContainer from './components/ErrorBoundaryContainer';
 import ErrorBoundaryMessage from './components/ErrorBoundaryMessage';
-import { IconDrink } from '../../shared-components/Icons/Icons';
+import IconDrink from '../../shared-components/Icons/IconDrink';
 import ErrorBoundaryButton from './components/ErrorBounderyButton';
 
 class ErrorBoundary extends React.Component {

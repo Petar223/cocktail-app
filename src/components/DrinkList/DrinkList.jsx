@@ -6,11 +6,6 @@ import CustomButton from '../../shared-components/CustomButton/CustomButton';
 import HeaderContent from '../Header/components/HeaderContent/HeaderContent';
 import ItemContainer from '../../shared-components/styledComponents/ItemContainer/ItemContainer';
 import { ButtonContainer } from '../../shared-components/ButtonContainer/ButtonContainer';
-import {
-  IconAdd,
-  IconBack,
-  IconInfo,
-} from '../../shared-components/Icons/Icons';
 import useFetch from '../../hooks/useFetch';
 import useLazyFetch from '../../hooks/useLazyFetch';
 import getDrinks from '../../api/rest/drinks/getDrinks';
@@ -24,6 +19,9 @@ import {
 } from '../../shared-components/InfoTooltip/infoTolltip';
 import useUserRole from '../../hooks/useUserRole';
 import { useNotification } from '../../context/NotificationContext';
+import IconAdd from '../../shared-components/Icons/IconAdd';
+import IconBack from '../../shared-components/Icons/IconBack';
+import IconInfo from '../../shared-components/Icons/IconInfo';
 
 const Container = styled.div`
   width: 100%;

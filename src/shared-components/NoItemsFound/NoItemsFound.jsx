@@ -1,8 +1,8 @@
 import React from 'react';
-import { IconDrink } from '../Icons/Icons';
 import NoItemContainer from './components/NoItemContainer';
 import NoItemIconWrapper from './components/NoItemIconWrapper';
 import NoItemMessage from './components/NoItemMessage';
+import IconDrink from '../../shared-components/Icons/IconDrink';
 
 function NoItemsFound({ message }) {
   return (

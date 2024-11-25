@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import CocktailModal from '../../modals/CocktailDetailsModal';
 import NoItemsFound from '../../shared-components/NoItemsFound/NoItemsFound';
 import Item from '../../shared-components/Item/Item';
@@ -13,18 +13,18 @@ import getCocktailById from '../../api/rest/drinks/getCocktailById';
 import deleteCocktail from '../../api/rest/drinks/deleteCocktail';
 import useFetch from '../../hooks/useFetch';
 import useLazyFetch from '../../hooks/useLazyFetch';
-import { IconBack } from '../../shared-components/Icons/Icons';
 import { ButtonContainer } from '../../shared-components/ButtonContainer/ButtonContainer';
 import Loading from '../../shared-components/Loading/Loading';
 import styled from 'styled-components';
 import { useNotification } from '../../context/NotificationContext';
+import IconBack from '../../shared-components/Icons/IconBack';
 
 const Container = styled.div`
   width: 100%;
 `;
 
 function FavoriteList() {
-  const { drinkId } = useParams();
+  // const { drinkId } = useParams();
   const [deleteId, setDeleteId] = useState(null);
   const showNotification = useNotification();
 

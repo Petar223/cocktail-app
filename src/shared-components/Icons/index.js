@@ -1,0 +1,9 @@
+export { default as IconAdd } from './IconAdd';
+export { default as IconBack } from './IconBack';
+export { default as IconClock } from './IconClock';
+export { default as IconDrink } from './IconDrink';
+export { default as IconExplore } from './IconExplore';
+export { default as IconHamburger } from './IconHamburger';
+export { default as IconHeart } from './IconHeart';
+export { default as IconHeartOutline } from './IconHeartOutline';
+export { default as IconInfo } from './IconInfo';

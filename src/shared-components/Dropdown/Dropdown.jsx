@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { IconHamburger } from '../Icons/Icons';
+import IconHamburger from '../../shared-components/Icons/IconHamburger';
 
 const DropdownContainer = styled.div`
   position: relative;
@@ -47,19 +47,16 @@ const Dropdown = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Funkcija za zatvaranje menija na klik van dropdown-a
   const handleClickOutside = event => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsOpen(false); // Zatvori meni ako je klik izvan dropdown-a
+      setIsOpen(false);
     }
   };
 
   useEffect(() => {
-    // Dodaj event listener za klik
     document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      // Ukloni event listener kada se komponenta unmount-uje
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
@@ -67,7 +64,7 @@ const Dropdown = ({ children }) => {
   return (
     <DropdownContainer ref={dropdownRef}>
       <DropdownButton onClick={() => setIsOpen(!isOpen)}>
-        <IconHamburger width="24" height="24" /> {/* Koristi hamburger ikonu */}
+        <IconHamburger width="24" height="24" />
       </DropdownButton>
       <DropdownMenu isOpen={isOpen}>
         {React.Children.map(children, child => (

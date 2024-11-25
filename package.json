@@ -7,7 +7,8 @@
     "build": "webpack --config config/webpack.prod.js --env production",
     "test": "react-scripts test",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-    "format:file": "prettier --write"
+    "format:file": "prettier --write",
+    "svgr": "svgr --out-dir src/shared-components/Icons src/assets/icons"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +47,8 @@
     "@babel/preset-env": "^7.25.8",
     "@babel/preset-react": "^7.25.7",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
+    "@svgr/cli": "^8.1.0",
+    "@svgr/webpack": "^8.1.0",
     "babel-loader": "^9.2.1",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^7.1.2",

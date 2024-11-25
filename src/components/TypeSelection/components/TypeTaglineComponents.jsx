@@ -4,7 +4,7 @@ import TypeTaglineLarger from './TypeTaglineLarger/TypeTaglineLarger';
 import TypeTagline from './TypeTagline/TypeTagline';
 import TypeButtonContainer from './TypeButtonContainer/TypeButtonContainer';
 import TypeImage from './TypeImage/TypeImage';
-import { IconExplore } from '../../../shared-components/Icons/Icons';
+import IconExplore from '../../../shared-components/Icons/IconExplore';
 import { Spinner } from '../../../shared-components/Spinner/Spinner';
 
 const TypeTaglineComponent = ({

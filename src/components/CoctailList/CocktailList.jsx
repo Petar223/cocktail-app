@@ -13,13 +13,15 @@ import getCocktailById from '../../api/rest/drinks/getCocktailById';
 import deleteCocktail from '../../api/rest/drinks/deleteCocktail';
 import useFetch from '../../hooks/useFetch';
 import useLazyFetch from '../../hooks/useLazyFetch';
-import { IconAdd, IconBack } from '../../shared-components/Icons/Icons';
+
 import { ButtonContainer } from '../../shared-components/ButtonContainer/ButtonContainer';
 import Loading from '../../shared-components/Loading/Loading';
 import styled from 'styled-components';
 import useUserRole from '../../hooks/useUserRole';
 import { useNotification } from '../../context/NotificationContext';
 import addFavoriteCocktail from '../../api/rest/drinks/addFavoriteCocktail';
+import IconAdd from '../../shared-components/Icons/IconAdd';
+import IconBack from '../../shared-components/Icons/IconBack';
 
 const Container = styled.div`
   width: 100%;
@@ -53,10 +55,8 @@ function CocktailList() {
   const [runDeleteCocktail, { loading: isDeleting, error: deleteError }] =
     useLazyFetch(deleteCocktail);
 
-  const [
-    runAddFavorite,
-    { loading: isAddingFavorite, error: addFavoriteError },
-  ] = useLazyFetch(addFavoriteCocktail);
+  const [runAddFavorite, { loading: isAddingFavorite }] =
+    useLazyFetch(addFavoriteCocktail);
 
   useEffect(() => {
     if (!isDeleting && !deleteError && deleteId !== null) {
