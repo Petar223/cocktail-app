@@ -16,7 +16,7 @@ import {
   InfoContainer,
   InfoText,
   IconContainer,
-} from '../../shared-components/InfoTooltip/infoTolltip';
+} from '../../shared-components/InfoTooltip/infoTooltip';
 import useUserRole from '../../hooks/useUserRole';
 import { useNotification } from '../../context/NotificationContext';
 import IconAdd from '../../shared-components/Icons/IconAdd';

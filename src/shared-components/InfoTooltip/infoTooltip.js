@@ -12,7 +12,7 @@ export const InfoText = styled.p`
   position: absolute;
   top: 100%;
   left: 0;
-  white-space: wrap;
+  white-space: normal;
   background-color: ${({ theme }) => theme.grey[800]};
   color: ${({ theme }) => theme.grey[100]};
   padding: 8px 12px;
