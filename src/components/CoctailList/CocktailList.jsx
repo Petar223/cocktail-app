@@ -125,12 +125,12 @@ function CocktailList() {
           <ButtonContainer>
             <CustomButton to={!type ? `/browse` : `/type/${type}`}>
               <IconBack width={32} height={32} fill="currentColor" />{' '}
-              {!type ? 'Back ot Type' : 'Back to Drinks'}
+              {!type ? 'Back to Type' : 'Back to Drinks'}
             </CustomButton>
             {(userRole === 'admin' || userRole === 'general') && (
               <CustomButton>
                 <IconAdd width={32} height={32} fill="currentColor" />
-                Add New Coctail{' '}
+                Add New Cocktail{' '}
               </CustomButton>
             )}
           </ButtonContainer>
