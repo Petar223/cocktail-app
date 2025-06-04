@@ -185,7 +185,7 @@ export const useMode = () => {
     []
   );
 
-  const theme = useMemo(() => tokens(mode), [mode]);
+  const theme = useMemo(() => ({ ...tokens(mode), mode }), [mode]);
 
   return [theme, colorMode];
 };
